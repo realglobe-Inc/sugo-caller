@@ -25,9 +25,34 @@ describe('sugo-terminal', function () {
   before(() => co(function * () {
     server = sgSocket(port)
     server.of('terminals').on('connection', (socket) => {
-      socket.on(JOIN, (data, callback) => {
-        callback({ status: OK })
-      })
+      socket
+        .on(JOIN, (data, callback) => {
+          callback({
+            status: OK,
+            payload: {
+              $specs: {
+                bash: {
+                  $desc: 'Bash interface',
+                  $methods: {
+                    spawn: {
+                      $desc: 'Spawn a command',
+                      $params: [
+                        { $name: 'cmd', $type: 'string', $desc: 'Command to spawn' },
+                        { $name: 'args', $type: 'array', $desc: 'Command arguments' },
+                        { $name: 'options', $type: 'Object', $desc: 'Optional settings' }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          })
+        })
+        .on(PERFORM, (data, callback) => {
+          callback({
+            status: OK
+          })
+        })
       socket.on(LEAVE, (data, callback) => {
         callback({ status: OK })
       })
@@ -43,9 +68,13 @@ describe('sugo-terminal', function () {
     let url = `http://localhost:${port}/terminals`
 
     let terminal = new SugoTerminal(url, {})
-    yield terminal.connect('hoge')
+    let spot01 = yield terminal.connect('hoge')
+
+    let bash = spot01.bash()
+    yield bash.spawn('ls', [ '-la' ])
 
     yield terminal.disconnect('hoge')
+
   }))
 })
 
