@@ -36,7 +36,8 @@
     "ape-updating": "^3.0.2",
     "apemansleep": "^1.0.1",
     "coz": "^6.0.2",
-    "injectmock": "^2.0.0"
+    "injectmock": "^2.0.0",
+    "sg-socket": "^1.0.10"
   },
   "engines": {
     "node": ">=6",
