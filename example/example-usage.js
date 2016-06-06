@@ -1,14 +1,17 @@
+#!/usr/bin/env node
 'use strict'
 
+const co = require('co')
 const sugoTerminal = require('sugo-terminal')
 
 const CLOUD_URL = 'my-sugo-cloud.example.com'
 const TARGET_SPOT_ID = 'my-spot-01'
 
-let terminal = sugoTerminal(CLOUD_URL, {})
+co(function * () {
+  let terminal = sugoTerminal(CLOUD_URL, {})
 
 // Connect to the target spot
-terminal.connect(TARGET_SPOT_ID, function * (spot) {
+  let spot = yield terminal.connect(TARGET_SPOT_ID)
   let bash = spot.bash() // Get bash interface
 
   // Trigger ls command on remote spot
@@ -29,3 +32,4 @@ terminal.connect(TARGET_SPOT_ID, function * (spot) {
   // Run reboot command
   yield bash.exec('reboot')
 })
+
