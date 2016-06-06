@@ -21,19 +21,24 @@ describe('spot-access', () => {
 
   it('Spot access', () => co(function * () {
     let access = new SpotAccess({
-      $methods: {
-        spawn: {
-          $desc: 'Spawn a command',
-          $params: [
-            { $name: 'cmd', $type: 'string', $desc: 'Command to spawn' },
-            { $name: 'args', $type: 'array', $desc: 'Command arguments' },
-            { $name: 'options', $type: 'Object', $desc: 'Optional settings' }
-          ]
+      bash: {
+        $methods: {
+          spawn: {
+            $desc: 'Spawn a command',
+            $params: [
+              { $name: 'cmd', $type: 'string', $desc: 'Command to spawn' },
+              { $name: 'args', $type: 'array', $desc: 'Command arguments' },
+              { $name: 'options', $type: 'Object', $desc: 'Optional settings' }
+            ]
+          }
         }
       }
+    }, {
+      invokeMethod: () => Promise.resolve(true)
     })
     let { bundle } = access
-    yield bundle.spawn('ls', [ '-la' ])
+    let bash = bundle.bash()
+    yield bash.spawn('ls', [ '-la' ])
 
     yield sleep.sleep(200)
   }))
