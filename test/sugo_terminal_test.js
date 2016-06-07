@@ -21,10 +21,11 @@ describe('sugo-terminal', function () {
   let sleep = apemansleep.create({})
   let port = 9854
   let server
-
+  let sockets = {}
   before(() => co(function * () {
     server = sgSocket(port)
     server.of('terminals').on('connection', (socket) => {
+      sockets[ socket.id ] = socket
       socket
         .on(JOIN, (data, callback) => {
           callback({
@@ -73,8 +74,28 @@ describe('sugo-terminal', function () {
     let bash = spot01.bash()
     yield bash.spawn('ls', [ '-la' ])
 
-    yield terminal.disconnect('hoge')
+    yield new Promise((resolve, reject) => {
+      bash.on('stdout', (data) => {
+        assert.deepEqual(data, {
+          'hoge': 'hogehoge'
+        })
+        resolve()
+      })
+      for (let id of Object.keys(sockets)) {
+        let socket = sockets[ id ]
+        socket.emit(PIPE, {
+          interface: 'bash',
+          event: 'stdout',
+          data: {
+            'hoge': 'hogehoge'
+          }
+        })
+      }
+    })
+    bash.emit('stdin', { foo: 'bar' })
+    yield sleep.sleep(20)
 
+    yield terminal.disconnect('hoge')
   }))
 })
 
