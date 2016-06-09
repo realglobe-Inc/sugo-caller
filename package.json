@@ -8,7 +8,8 @@
   },
   "repository": "realglobe-Inc/sugo-terminal",
   "keywords": [
-    "SUGOS"
+    "SUGOS",
+    "terminal"
   ],
   "author": {
     "name": "Taka Okunishi",
@@ -22,8 +23,8 @@
   "homepage": "https://github.com/realglobe-Inc/sugo-terminal#readme",
   "dependencies": {
     "co": "^4.6.0",
-    "sg-socket-client": "^1.1.2",
-    "sg-socket-constants": "^1.1.2"
+    "sg-socket-client": "^1.2.6",
+    "sg-socket-constants": "^1.2.10"
   },
   "devDependencies": {
     "ape-covering": "^3.0.3",
@@ -32,12 +33,12 @@
     "ape-reporting": "^3.0.1",
     "ape-tasking": "^4.0.0",
     "ape-testing": "^4.0.0",
-    "ape-tmpl": "^5.0.1",
+    "ape-tmpl": "^5.0.2",
     "ape-updating": "^3.0.2",
     "apemansleep": "^1.0.1",
     "coz": "^6.0.2",
     "injectmock": "^2.0.0",
-    "sg-socket": "^1.0.10"
+    "sg-socket": "^1.0.11"
   },
   "engines": {
     "node": ">=6",

@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+
+/**
+ * This is an example to use terminal to connect remote spot
+ */
 'use strict'
 
 const co = require('co')
@@ -12,24 +16,24 @@ co(function * () {
 
 // Connect to the target spot
   let spot = yield terminal.connect(TARGET_SPOT_ID)
-  let bash = spot.bash() // Get bash interface
+  let shell = spot.shell() // Get bash interface
 
   // Trigger ls command on remote spot
   {
-    let lsResult = yield bash.exec('ls -la /opt/shared')
+    let lsResult = yield shell.exec('ls -la /opt/shared')
     console.log(lsResult)
   }
 
   // Pipe std out
   {
     let out = (chunk) => process.stdout.write(chunk)
-    bash.on('stdout', out)
-    bash.exec('tail -f /var/log/app.log') // Trigger tailing without blocking
+    shell.on('stdout', out)
+    shell.spawn('tail -f /var/log/app.log') // Trigger tailing without blocking
     yield new Promise((resolve) => setTimeout(() => resolve(), 3000)) // Block for duration
-    bash.off('stdout', out)
+    shell.off('stdout', out)
   }
 
   // Run reboot command
-  yield bash.exec('reboot')
-})
+  yield shell.exec('reboot')
+}).catch((err) => console.error(err))
 
