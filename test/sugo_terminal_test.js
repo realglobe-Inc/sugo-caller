@@ -31,16 +31,18 @@ describe('sugo-terminal', function () {
           callback({
             status: OK,
             payload: {
-              $specs: {
+              specs: {
                 bash: {
-                  $desc: 'Bash interface',
-                  $methods: {
+                  name: '',
+                  desc: 'Bash interface',
+                  version: '1.0.0',
+                  methods: {
                     spawn: {
-                      $desc: 'Spawn a command',
-                      $params: [
-                        { $name: 'cmd', $type: 'string', $desc: 'Command to spawn' },
-                        { $name: 'args', $type: 'array', $desc: 'Command arguments' },
-                        { $name: 'options', $type: 'Object', $desc: 'Optional settings' }
+                      desc: 'Spawn a command',
+                      params: [
+                        { name: 'cmd', type: 'string', desc: 'Command to spawn' },
+                        { name: 'args', type: 'array', desc: 'Command arguments' },
+                        { name: 'options', type: 'Object', desc: 'Optional settings' }
                       ]
                     }
                   }
