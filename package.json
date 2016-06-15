@@ -1,6 +1,6 @@
 {
   "name": "sugo-terminal",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Terminal to access remote spot",
   "main": "lib",
   "scripts": {
