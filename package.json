@@ -1,6 +1,6 @@
 {
   "name": "sugo-terminal",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Terminal to access remote spot",
   "main": "lib",
   "browser": "browser",
@@ -26,12 +26,12 @@
   "dependencies": {
     "co": "^4.6.0",
     "sg-schemas": "^1.1.3",
-    "sg-socket-client": "^1.2.6",
-    "sg-socket-constants": "^1.2.11",
+    "sg-socketsg-socket-client": "^1.2.6",
+    "sg-socket-constants": "^1.3.0",
     "sg-validator": "^1.0.1"
   },
   "devDependencies": {
-    "ape-compiling": "^4.2.0",
+    "ape-compiling": "^4.3.0",
     "ape-covering": "^3.0.3",
     "ape-formatting": "^1.0.0",
     "ape-releasing": "^3.1.1",
@@ -40,7 +40,7 @@
     "ape-testing": "^4.0.0",
     "ape-tmpl": "^5.0.2",
     "ape-updating": "^3.0.2",
-    "apemansleep": "^1.0.2",
+    "apemansleep": "^1.0.3",
     "coz": "^6.0.2",
     "injectmock": "^2.0.0",
     "sg-socket": "^1.0.11"

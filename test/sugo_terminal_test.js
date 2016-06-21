@@ -17,7 +17,7 @@ const { PERFORM, PIPE, JOIN, LEAVE } = RemoteEvents
 
 describe('sugo-terminal', function () {
   this.timeout(4000)
-
+  
   let sleep = apemansleep.create({})
   let port = 9854
   let server
