@@ -18,7 +18,7 @@
     "email": "okunishitaka.com@gmail.com",
     "url": "http://okunishitaka.com"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/realglobe-Inc/sugo-terminal/issues"
   },
@@ -31,19 +31,19 @@
     "sg-validator": "^1.0.1"
   },
   "devDependencies": {
-    "ape-compiling": "^4.3.0",
+    "ape-compiling": "^4.3.2",
     "ape-covering": "^3.0.3",
     "ape-formatting": "^1.0.0",
-    "ape-releasing": "^3.1.1",
+    "ape-releasing": "^4.0.1",
     "ape-reporting": "^3.0.1",
-    "ape-tasking": "^4.0.1",
+    "ape-tasking": "^4.0.2",
     "ape-testing": "^4.0.0",
-    "ape-tmpl": "^5.0.2",
-    "ape-updating": "^3.0.2",
+    "ape-tmpl": "^5.0.6",
+    "ape-updating": "^4.0.1",
     "apemansleep": "^1.0.3",
-    "coz": "^6.0.2",
+    "coz": "^6.0.3",
     "injectmock": "^2.0.0",
-    "sg-socket": "^1.0.11"
+    "sg-socket": "^1.0.12"
   },
   "engines": {
     "node": ">=6",
