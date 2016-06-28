@@ -1,6 +1,6 @@
 {
   "name": "sugo-terminal",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Terminal to access remote spot",
   "main": "lib",
   "browser": "browser",
@@ -45,11 +45,11 @@
     "filecopy": "^2.0.0",
     "injectmock": "^2.0.0",
     "sg-socket": "^1.0.12",
-    "sugos-assets": "^1.1.3"
+    "sugos-assets": "^1.1.4"
   },
   "engines": {
-    "node": ">=6",
-    "npm": ">=3"
+    "node": ">=6.x",
+    "npm": ">=3.x"
   },
   "publishConfig": {
     "registry": "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-local"
