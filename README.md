@@ -46,7 +46,7 @@ Terminal to access remote spot
 <a name="overview"></a>
 
 
-SUGO-Terminal works a client of SUGO-Cloud and provides access on to remote spot interface as JavaScript functions.
+SUGO-Terminal works a client of [SUGO-Cloud][sugo_cloud_url] and provides access on to remote spot interface as JavaScript functions.
  
 
 <!-- Overview End -->
@@ -168,8 +168,12 @@ This software is released under the [Apache-2.0 License](https://github.com/real
 Links
 ------
 
-+ [sugos](https://github.com/realglobe-Inc/sugos)
-+ [sugo-cloud](https://github.com/realglobe-Inc/sugo-cloud)
-+ [sugo-spot](https://github.com/realglobe-Inc/sugo-spot)
++ [sugos][sugos_url]
++ [sugo-cloud][sugo_cloud_url]
++ [sugo-spot][sugo_spot_url]
+
+[sugos_url]: https://github.com/realglobe-Inc/sugos
+[sugo_cloud_url]: https://github.com/realglobe-Inc/sugo-cloud
+[sugo_spot_url]: https://github.com/realglobe-Inc/sugo-spot
 
 <!-- Links End -->
