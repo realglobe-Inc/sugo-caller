@@ -3,7 +3,7 @@
   "version": "1.0.15",
   "description": "Terminal to access remote spot",
   "main": "lib",
-  "browser": "browser",
+  "browser": "sims/browser",
   "scripts": {
     "test": "./ci/test.js",
     "prepublish": "./ci/assets.js && ./ci/build.js && ./ci/browser.js"
