@@ -7,7 +7,8 @@
 const SugoTerminal = require('../lib/sugo_terminal.js')
 const assert = require('assert')
 const sgSocket = require('sg-socket')
-const apemansleep = require('apemansleep')
+const asleep = require('asleep')
+const aport = require('aport')
 const co = require('co')
 
 const { RemoteEvents, AcknowledgeStatus } = require('sg-socket-constants')
@@ -17,12 +18,11 @@ const { PERFORM, PIPE, JOIN, LEAVE } = RemoteEvents
 
 describe('sugo-terminal', function () {
   this.timeout(4000)
-  
-  let sleep = apemansleep.create({})
-  let port = 9854
-  let server
+
+  let port, server
   let sockets = {}
   before(() => co(function * () {
+    port = yield aport()
     server = sgSocket(port)
     server.of('terminals').on('connection', (socket) => {
       sockets[ socket.id ] = socket
@@ -63,7 +63,7 @@ describe('sugo-terminal', function () {
   }))
 
   after(() => co(function * () {
-    yield sleep.sleep(200)
+    yield asleep(200)
     server.close()
   }))
 
@@ -95,7 +95,7 @@ describe('sugo-terminal', function () {
       }
     })
     bash.emit('stdin', { foo: 'bar' })
-    yield sleep.sleep(20)
+    yield asleep(20)
 
     yield terminal.disconnect('hoge')
   }))

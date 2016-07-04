@@ -6,11 +6,10 @@
 
 const SpotAccess = require('../lib/accessing/spot_access.js')
 const assert = require('assert')
-const apemansleep = require('apemansleep')
+const asleep = require('asleep')
 const co = require('co')
 
 describe('spot-access', () => {
-  let sleep = apemansleep.create()
   before(() => co(function * () {
 
   }))
@@ -46,7 +45,7 @@ describe('spot-access', () => {
     let bash = bundle.bash()
     yield bash.spawn('ls', [ '-la' ])
     bash.emit('stdin', 'hoge')
-    yield sleep.sleep(200)
+    yield asleep(200)
   }))
 })
 

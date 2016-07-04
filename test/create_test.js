@@ -18,7 +18,7 @@ describe('create', () => {
   }))
 
   it('Create', () => co(function * () {
-
+    assert.ok(create('http://example.com'))
   }))
 })
 
