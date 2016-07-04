@@ -1,6 +1,6 @@
 {
   "name": "sugo-terminal",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Terminal to access remote spot",
   "main": "lib",
   "browser": "sims/browser",
