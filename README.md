@@ -154,11 +154,11 @@ co(function * () {
 Tips
 ---------
 
-### Restrict the connecting interface
+### Restricting Connecting Interfaces
 
-Sometime you would like to make sure that the spot has right interface as expected.
+Sometime you would like to make sure that the spot has right interfaces as expected.
 
-You can pass a json schema to `expect` to options when accessing a interface.
+You can pass a JSON-Schema to `expect` option when accessing an interface.
 If the interface does not conform to the schema, it throws an error.
 
 ```javascript
@@ -193,7 +193,7 @@ co(function * () {
   let shell
   try {
     shell = spot.shell({
-      // Pass a JSON-Schema to validate the interface
+      // Pass a JSON-Schema to validate the interface. Throws an error if invalid
       expect: shellSchemaV2
     })
   } catch (err) {
