@@ -148,6 +148,66 @@ co(function * () {
 
 <!-- Section from "doc/guides/02.Usage.md.hbs" End -->
 
+<!-- Section from "doc/guides/03.Tips.md.hbs" Start -->
+
+<a name="section-doc-guides-03-tips-md"></a>
+Tips
+---------
+
+### Restrict the connecting interface
+
+Sometime you would like to make sure that the spot has right interface as expected.
+
+You can pass a json schema to `expect` to options when accessing a interface.
+If the interface does not conform to the schema, it throws an error.
+
+```javascript
+#!/usr/bin/env node
+
+/**
+ * This is an example to restrict an interface with json schema
+ */
+'use strict'
+
+const co = require('co')
+const sugoTerminal = require('sugo-terminal')
+
+const CLOUD_URL = 'my-sugo-cloud.example.com/terminals'
+const TARGET_SPOT_ID = 'my-spot-01'
+
+// JSON-Schema for expected spec info
+const shellSchemaV2 = {
+  type: 'object',
+  properties: {
+    name: { enum: [ 'shell' ] }, // Should be shell
+    version: { pattern: '^2\.' } // Major version must be 2
+    /* ... */
+  }
+}
+
+co(function * () {
+  let terminal = sugoTerminal(CLOUD_URL, {})
+
+ // Connect to the target spot
+  let spot = yield terminal.connect(TARGET_SPOT_ID)
+  let shell
+  try {
+    shell = spot.shell({
+      // Pass a JSON-Schema to validate the interface
+      expect: shellSchemaV2
+    })
+  } catch (err) {
+    console.error('Failed to access!!')
+    return
+  }
+  /* ... */
+}).catch((err) => console.error(err))
+
+
+```
+
+<!-- Section from "doc/guides/03.Tips.md.hbs" End -->
+
 
 <!-- Sections Start -->
 
