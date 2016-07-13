@@ -29,7 +29,7 @@ co(function * () {
   let shell
   try {
     shell = spot.shell({
-      // Pass a JSON-Schema to validate the interface
+      // Pass a JSON-Schema to validate the interface. Throws an error if invalid
       expect: shellSchemaV2
     })
   } catch (err) {
