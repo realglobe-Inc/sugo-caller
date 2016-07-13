@@ -33,7 +33,7 @@ describe('sugo-terminal', function () {
             payload: {
               specs: {
                 bash: {
-                  name: '',
+                  name: 'bash',
                   desc: 'Bash interface',
                   version: '1.0.0',
                   methods: {
@@ -98,6 +98,26 @@ describe('sugo-terminal', function () {
     yield asleep(20)
 
     yield terminal.disconnect('hoge')
+
+    // Validate the connecting interface
+    {
+      let caught
+      try {
+        yield spot01.bash({
+          expect: {
+            type: 'object',
+            properties: {
+              name: {
+                enum: [ 'super-bash', 'ultra-bash' ]
+              }
+            }
+          }
+        })
+      } catch (err) {
+        caught = err
+      }
+      assert.ok(caught)
+    }
   }))
 })
 
