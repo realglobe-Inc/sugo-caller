@@ -113,7 +113,7 @@ Usage
 const co = require('co')
 const sugoTerminal = require('sugo-terminal')
 
-const CLOUD_URL = 'my-sugo-cloud.example.com/terminals'
+const CLOUD_URL = 'https://my-sugo-cloud.example.com/terminals'
 const TARGET_SPOT_ID = 'my-spot-01'
 
 co(function * () {
