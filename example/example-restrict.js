@@ -8,9 +8,6 @@
 const co = require('co')
 const sugoTerminal = require('sugo-terminal')
 
-const CLOUD_URL = 'my-sugo-cloud.example.com/terminals'
-const TARGET_SPOT_ID = 'my-spot-01'
-
 // JSON-Schema for expected spec info
 const shellSchemaV2 = {
   type: 'object',
@@ -22,10 +19,9 @@ const shellSchemaV2 = {
 }
 
 co(function * () {
-  let terminal = sugoTerminal(CLOUD_URL, {})
+  let terminal = sugoTerminal('https://my-sugo-cloud.example.com/terminals', {})
+  let spot = yield terminal.connect('my-spot-01')
 
- // Connect to the target spot
-  let spot = yield terminal.connect(TARGET_SPOT_ID)
   let shell
   try {
     shell = spot.shell({
