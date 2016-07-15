@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const SugoTerminal = require('../lib/sugo_terminal.js')
+const SugoCaller = require('../lib/sugo_caller.js')
 const assert = require('assert')
 const sgSocket = require('sg-socket')
 const asleep = require('asleep')
@@ -16,7 +16,7 @@ const { RemoteEvents, AcknowledgeStatus } = require('sg-socket-constants')
 const { OK, NG } = AcknowledgeStatus
 const { PERFORM, PIPE, JOIN, LEAVE } = RemoteEvents
 
-describe('sugo-terminal', function () {
+describe('sugo-caller', function () {
   this.timeout(4000)
 
   let port, server
@@ -70,7 +70,7 @@ describe('sugo-terminal', function () {
   it('Sugo terminal', () => co(function * () {
     let url = `http://localhost:${port}/terminals`
 
-    let terminal = new SugoTerminal(url, {})
+    let terminal = new SugoCaller(url, {})
     let spot01 = yield terminal.connect('hoge')
 
     let bash = spot01.bash()

@@ -6,7 +6,7 @@
 'use strict'
 
 const co = require('co')
-const sugoTerminal = require('sugo-terminal')
+const sugoTerminal = require('sugo-caller')
 
 // JSON-Schema for expected spec info
 const shellSchemaV2 = {

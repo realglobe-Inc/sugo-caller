@@ -4,12 +4,12 @@
 
 'use strict'
 
-const apeTmpl = require('ape-tmpl')
+const { readmeMdBud } = require('ape-tmpl')
 const pkg = require('./package.json')
 
-module.exports = apeTmpl.readmeMdBud({
+module.exports = readmeMdBud({
   pkg,
-  banner: 'assets/images/sugo-terminal-banner.png',
+  banner: 'assets/images/sugo-caller-banner.png',
   bannerSize: 148,
   repo: pkg.repository,
   sections: 'doc/guides/*.md.hbs',

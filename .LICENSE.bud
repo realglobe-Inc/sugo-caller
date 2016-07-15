@@ -4,10 +4,10 @@
 
 'use strict'
 
-const apeTmpl = require('ape-tmpl')
+const { licenseBud } = require('ape-tmpl')
 const pkg = require('./package.json')
 
-module.exports = apeTmpl.licenseBud({
+module.exports = licenseBud({
   type: pkg.license,
   holder: pkg.repository.split(/\//).shift(),
   year: 2016

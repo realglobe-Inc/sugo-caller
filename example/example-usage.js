@@ -6,7 +6,7 @@
 'use strict'
 
 const co = require('co')
-const sugoTerminal = require('sugo-terminal')
+const sugoTerminal = require('sugo-caller')
 
 const CLOUD_URL = 'https://my-sugo-cloud.example.com/terminals'
 const TARGET_SPOT_ID = 'my-spot-01'

@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const TerminalValidator = require('../lib/validating/terminal_validator.js')
+const ActorValidator = require('../lib/validating/caller_validator.js')
 const assert = require('assert')
 const co = require('co')
 
@@ -18,7 +18,7 @@ describe('terminal-validator', () => {
   }))
 
   it('Terminal validator', () => co(function * () {
-    assert.ok(new TerminalValidator())
+    assert.ok(new ActorValidator())
   }))
 })
 

@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const SpotAccess = require('../lib/accessing/spot_access.js')
+const ActorAccess = require('../lib/accessing/actor_access.js')
 const assert = require('assert')
 const asleep = require('asleep')
 const co = require('co')
@@ -19,7 +19,7 @@ describe('spot-access', () => {
   }))
 
   it('Spot access', () => co(function * () {
-    let access = new SpotAccess({
+    let access = new ActorAccess({
       specs: {
         bash: {
           methods: {

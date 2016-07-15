@@ -5,14 +5,14 @@
 
 'use strict'
 
-const SugoTerminal = require('./sugo_terminal')
+const SugoCaller = require('./sugo_caller')
 const create = require('./create')
 
 let lib = create.bind(this)
 
-Object.assign(lib, SugoTerminal, {
+Object.assign(lib, SugoCaller, {
   create,
-  SugoTerminal
+  SugoCaller
 })
 
 module.exports = lib
