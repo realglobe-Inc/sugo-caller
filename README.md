@@ -106,24 +106,24 @@ Usage
 #!/usr/bin/env node
 
 /**
- * This is an example to use terminal to connect remote spot
+ * This is an example to use caller to connect remote actor
  */
 'use strict'
 
 const co = require('co')
-const sugoTerminal = require('sugo-caller')
+const sugoCaller = require('sugo-caller')
 
-const CLOUD_URL = 'https://my-sugo-cloud.example.com/terminals'
-const TARGET_SPOT_ID = 'my-spot-01'
+const CLOUD_URL = 'https://my-sugo-cloud.example.com/callers'
+const TARGET_ACTOR_ID = 'my-actor-01'
 
 co(function * () {
-  let terminal = sugoTerminal(CLOUD_URL, {})
+  let caller = sugoCaller(CLOUD_URL, {})
 
-// Connect to the target spot
-  let spot = yield terminal.connect(TARGET_SPOT_ID)
-  let shell = spot.shell() // Get bash interface
+// Connect to the target actor
+  let actor = yield caller.connect(TARGET_ACTOR_ID)
+  let shell = actor.shell() // Get bash interface
 
-  // Trigger ls command on remote spot
+  // Trigger ls command on remote actor
   {
     let lsResult = yield shell.exec('ls -la /opt/shared')
     console.log(lsResult)
@@ -138,7 +138,7 @@ co(function * () {
     shell.off('stdout', out)
   }
 
-  // Run reboot command
+  // Exec reboot command
   yield shell.exec('reboot')
 }).catch((err) => console.error(err))
 
@@ -165,12 +165,12 @@ If the modules does not conform to the schema, it throws an error.
 #!/usr/bin/env node
 
 /**
- * This is an example to restrict an interface with json schema
+ * This is an example to restrict a module with json schema
  */
 'use strict'
 
 const co = require('co')
-const sugoTerminal = require('sugo-caller')
+const sugoCaller = require('sugo-caller')
 
 // JSON-Schema for expected spec info
 const shellSchemaV2 = {
@@ -183,13 +183,13 @@ const shellSchemaV2 = {
 }
 
 co(function * () {
-  let terminal = sugoTerminal('https://my-sugo-cloud.example.com/terminals', {})
-  let spot = yield terminal.connect('my-spot-01')
+  let caller = sugoCaller('https://my-sugo-cloud.example.com/callers', {})
+  let actor = yield caller.connect('my-actor-01')
 
   let shell
   try {
-    shell = spot.shell({
-      // Pass a JSON-Schema to validate the interface. Throws an error if invalid
+    shell = actor.shell({
+      // Pass a JSON-Schema to validate the module. Throws an error if invalid
       expect: shellSchemaV2
     })
   } catch (err) {

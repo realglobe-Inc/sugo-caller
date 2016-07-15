@@ -1,5 +1,5 @@
 /**
- * Test case for sugoTerminal.
+ * Test case for sugoCaller.
  * Runs with mocha.
  */
 'use strict'
@@ -24,7 +24,7 @@ describe('sugo-caller', function () {
   before(() => co(function * () {
     port = yield aport()
     server = sgSocket(port)
-    server.of('terminals').on('connection', (socket) => {
+    server.of('callers').on('connection', (socket) => {
       sockets[ socket.id ] = socket
       socket
         .on(JOIN, (data, callback) => {
@@ -34,7 +34,7 @@ describe('sugo-caller', function () {
               specs: {
                 bash: {
                   name: 'bash',
-                  desc: 'Bash interface',
+                  desc: 'Bash module',
                   version: '1.0.0',
                   methods: {
                     spawn: {
@@ -67,13 +67,13 @@ describe('sugo-caller', function () {
     server.close()
   }))
 
-  it('Sugo terminal', () => co(function * () {
-    let url = `http://localhost:${port}/terminals`
+  it('Sugo caller', () => co(function * () {
+    let url = `http://localhost:${port}/callers`
 
-    let terminal = new SugoCaller(url, {})
-    let spot01 = yield terminal.connect('hoge')
+    let caller = new SugoCaller(url, {})
+    let actor01 = yield caller.connect('hoge')
 
-    let bash = spot01.bash()
+    let bash = actor01.bash()
     yield bash.spawn('ls', [ '-la' ])
 
     yield new Promise((resolve, reject) => {
@@ -86,7 +86,7 @@ describe('sugo-caller', function () {
       for (let id of Object.keys(sockets)) {
         let socket = sockets[ id ]
         socket.emit(PIPE, {
-          interface: 'bash',
+          module: 'bash',
           event: 'stdout',
           data: {
             'hoge': 'hogehoge'
@@ -97,13 +97,13 @@ describe('sugo-caller', function () {
     bash.emit('stdin', { foo: 'bar' })
     yield asleep(20)
 
-    yield terminal.disconnect('hoge')
+    yield caller.disconnect('hoge')
 
-    // Validate the connecting interface
+    // Validate the connecting module
     {
       let caught
       try {
-        yield spot01.bash({
+        yield actor01.bash({
           expect: {
             type: 'object',
             properties: {
