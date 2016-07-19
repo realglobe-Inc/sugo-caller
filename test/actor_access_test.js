@@ -42,7 +42,7 @@ describe('actor-access', () => {
     })
     assert.ok(access)
     let { bundle } = access
-    let bash = bundle.bash()
+    let bash = bundle.get('bash')
     yield bash.spawn('ls', [ '-la' ])
     bash.emit('stdin', 'hoge')
     yield asleep(200)

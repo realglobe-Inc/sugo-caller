@@ -24,7 +24,7 @@ co(function * () {
 
   let shell
   try {
-    shell = actor.module('shell', {
+    shell = actor.get('shell', {
       // Pass a JSON-Schema to validate the module. Throws an error if invalid
       expect: shellSchemaV2
     })

@@ -8,7 +8,7 @@ const ActorValidator = require('../lib/validating/caller_validator.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('terminal-validator', () => {
+describe('caller-validator', () => {
   before(() => co(function * () {
 
   }))

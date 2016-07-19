@@ -121,7 +121,7 @@ co(function * () {
 
 // Connect to the target actor
   let actor = yield caller.connect(TARGET_ACTOR_ID)
-  let shell = actor.module('shell') // Get bash interface
+  let shell = actor.get('shell') // Get bash interface
 
   // Trigger ls command on remote actor
   {
@@ -188,7 +188,7 @@ co(function * () {
 
   let shell
   try {
-    shell = actor.module('shell', {
+    shell = actor.get('shell', {
       // Pass a JSON-Schema to validate the module. Throws an error if invalid
       expect: shellSchemaV2
     })

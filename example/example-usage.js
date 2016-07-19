@@ -16,7 +16,7 @@ co(function * () {
 
 // Connect to the target actor
   let actor = yield caller.connect(TARGET_ACTOR_ID)
-  let shell = actor.module('shell') // Get bash interface
+  let shell = actor.get('shell') // Get bash interface
 
   // Trigger ls command on remote actor
   {
