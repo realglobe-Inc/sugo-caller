@@ -32,7 +32,8 @@
     "sg-validator": "^1.0.1"
   },
   "devDependencies": {
-    "ape-compiling": "^5.0.0",
+    "ababel": "^1.0.17",
+    "ababel-es2015": "^1.0.1",
     "ape-covering": "^3.0.3",
     "ape-formatting": "^1.0.0",
     "ape-releasing": "^4.0.1",

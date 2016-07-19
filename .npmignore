@@ -34,5 +34,4 @@ node_modules
 .idea
 tmp
 
-
-!browser
+assets

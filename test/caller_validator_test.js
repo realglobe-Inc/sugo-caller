@@ -1,5 +1,5 @@
 /**
- * Test case for terminalValidator.
+ * Test case for ActorValidator.
  * Runs with mocha.
  */
 'use strict'

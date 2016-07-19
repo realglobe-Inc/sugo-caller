@@ -1,5 +1,5 @@
 /**
- * Test case for spotAccess.
+ * Test case for actorAccess.
  * Runs with mocha.
  */
 'use strict'
@@ -9,7 +9,7 @@ const assert = require('assert')
 const asleep = require('asleep')
 const co = require('co')
 
-describe('spot-access', () => {
+describe('actor-access', () => {
   before(() => co(function * () {
 
   }))
@@ -18,7 +18,7 @@ describe('spot-access', () => {
 
   }))
 
-  it('Spot access', () => co(function * () {
+  it('Actor access', () => co(function * () {
     let access = new ActorAccess({
       specs: {
         bash: {

@@ -73,7 +73,8 @@ describe('sugo-caller', function () {
     let caller = new SugoCaller(url, {})
     let actor01 = yield caller.connect('hoge')
 
-    let bash = actor01.bash()
+    assert.ok(actor01.has('bash'))
+    let bash = actor01.module('bash')
     yield bash.spawn('ls', [ '-la' ])
 
     yield new Promise((resolve, reject) => {
@@ -103,7 +104,7 @@ describe('sugo-caller', function () {
     {
       let caught
       try {
-        yield actor01.bash({
+        yield actor01.module('bash')({
           expect: {
             type: 'object',
             properties: {
