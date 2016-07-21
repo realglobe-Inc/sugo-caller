@@ -76,7 +76,8 @@ describe('sugo-caller', function () {
     assert.ok(actor01.has('bash'))
     let bash = actor01.get('bash')
     yield bash.spawn('ls', [ '-la' ])
-
+    let print = (data) => console.log(data)
+    bash.on('stdout', print)
     yield new Promise((resolve, reject) => {
       bash.on('stdout', (data) => {
         assert.deepEqual(data, {
@@ -95,6 +96,7 @@ describe('sugo-caller', function () {
         })
       }
     })
+    bash.off('stdout', print)
     bash.emit('stdin', { foo: 'bar' })
     yield asleep(20)
 

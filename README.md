@@ -58,6 +58,7 @@ SUGO-Caller works as a client of [SUGO-Cloud][sugo_cloud_url] and provides acces
 <!-- Section from "doc/guides/00.Requirements.md.hbs" Start -->
 
 <a name="section-doc-guides-00-requirements-md"></a>
+
 Requirements
 -----
 
@@ -86,6 +87,7 @@ Requirements
 <!-- Section from "doc/guides/01.Installation.md.hbs" Start -->
 
 <a name="section-doc-guides-01-installation-md"></a>
+
 Installation
 -----
 
@@ -99,6 +101,7 @@ $ npm install sugo-caller --save
 <!-- Section from "doc/guides/02.Usage.md.hbs" Start -->
 
 <a name="section-doc-guides-02-usage-md"></a>
+
 Usage
 ---------
 
@@ -151,6 +154,7 @@ co(function * () {
 <!-- Section from "doc/guides/03.Tips.md.hbs" Start -->
 
 <a name="section-doc-guides-03-tips-md"></a>
+
 Tips
 ---------
 

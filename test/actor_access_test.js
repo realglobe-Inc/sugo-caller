@@ -37,7 +37,8 @@ describe('actor-access', () => {
       connector: {
         invoke: () => Promise.resolve(true),
         fire: () => Promise.resolve(true),
-        listen: () => Promise.resolve(true)
+        listen: () => Promise.resolve(true),
+        delisten: () => Promise.resolve(true)
       }
     })
     assert.ok(access)
