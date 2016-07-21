@@ -37,6 +37,7 @@ describe('sugo-caller', function () {
                   desc: 'Bash module',
                   version: '1.0.0',
                   methods: {
+                    default: {},
                     spawn: {
                       desc: 'Spawn a command',
                       params: [
@@ -96,17 +97,22 @@ describe('sugo-caller', function () {
         })
       }
     })
+    assert.deepEqual(bash.eventNames(), [ 'stdout' ])
     bash.off('stdout', print)
     bash.emit('stdin', { foo: 'bar' })
+    
+    yield bash() // Call default
+
     yield asleep(20)
 
     yield caller.disconnect('hoge')
+
 
     // Validate the connecting module
     {
       let caught
       try {
-        yield actor01.get('bash')({
+        yield actor01.get('bash', {
           expect: {
             type: 'object',
             properties: {
