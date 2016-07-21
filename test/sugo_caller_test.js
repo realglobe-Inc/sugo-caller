@@ -100,14 +100,23 @@ describe('sugo-caller', function () {
     assert.deepEqual(bash.eventNames(), [ 'stdout' ])
     bash.off('stdout', print)
     bash.emit('stdin', { foo: 'bar' })
-    
+
     yield bash() // Call default
 
     yield asleep(20)
 
     yield caller.disconnect('hoge')
 
-
+    // Try call after disconnected
+    {
+      let caught
+      try {
+        yield bash() // Call default
+      } catch (err) {
+        caught = err
+      }
+      assert.ok(caught)
+    }
     // Validate the connecting module
     {
       let caught
