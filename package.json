@@ -1,6 +1,6 @@
 {
   "name": "sugo-caller",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Caller component of SUGOS.",
   "main": "lib",
   "browser": "sims/browser",
