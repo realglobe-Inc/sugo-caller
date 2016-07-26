@@ -3,7 +3,7 @@
   "version": "2.1.4",
   "description": "Caller component of SUGOS.",
   "main": "lib",
-  "browser": "sims/browser",
+  "browser": "shim/browser",
   "scripts": {
     "test": "./ci/test.js",
     "prepublish": "./ci/assets.js && ./ci/build.js && ./ci/browser.js"
@@ -47,6 +47,7 @@
     "filecopy": "^2.0.0",
     "filedel": "^2.0.2",
     "injectmock": "^2.0.0",
+    "markdown-toc": "^0.12.15",
     "sg-socket": "^1.0.12",
     "sugos-assets": "^2.0.1"
   },

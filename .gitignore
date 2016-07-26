@@ -33,4 +33,4 @@ tmp
 .npmrc
 .DS_Store
 
-sims/browser
+shim/browser

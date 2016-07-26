@@ -55,9 +55,27 @@ SUGO-Caller works as a client of [SUGO-Cloud][sugo_cloud_url] and provides acces
 <!-- Sections Start -->
 <a name="sections"></a>
 
-<!-- Section from "doc/guides/00.Requirements.md.hbs" Start -->
+<!-- Section from "doc/guides/00.TOC.md.hbs" Start -->
 
-<a name="section-doc-guides-00-requirements-md"></a>
+<a name="section-doc-guides-00-t-o-c-md"></a>
+
+Table of Contents
+----------------
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Tips](#tips)
+  * [Restricting Connecting Modules](#restricting-connecting-modules)
+- [License](#license)
+- [Links](#links)
+
+
+<!-- Section from "doc/guides/00.TOC.md.hbs" End -->
+
+<!-- Section from "doc/guides/10.Requirements.md.hbs" Start -->
+
+<a name="section-doc-guides-10-requirements-md"></a>
 
 Requirements
 -----
@@ -82,11 +100,11 @@ Requirements
 [npm_url]: https://docs.npmjs.com/
 
 
-<!-- Section from "doc/guides/00.Requirements.md.hbs" End -->
+<!-- Section from "doc/guides/10.Requirements.md.hbs" End -->
 
-<!-- Section from "doc/guides/01.Installation.md.hbs" Start -->
+<!-- Section from "doc/guides/21.Installation.md.hbs" Start -->
 
-<a name="section-doc-guides-01-installation-md"></a>
+<a name="section-doc-guides-21-installation-md"></a>
 
 Installation
 -----
@@ -96,14 +114,16 @@ $ npm install sugo-caller --save
 ```
 
 
-<!-- Section from "doc/guides/01.Installation.md.hbs" End -->
+<!-- Section from "doc/guides/21.Installation.md.hbs" End -->
 
-<!-- Section from "doc/guides/02.Usage.md.hbs" Start -->
+<!-- Section from "doc/guides/22.Usage.md.hbs" Start -->
 
-<a name="section-doc-guides-02-usage-md"></a>
+<a name="section-doc-guides-22-usage-md"></a>
 
 Usage
 ---------
+
+Create a caller instance with [SUGO-Cloud][sugo_cloud_url] url and connect to an [SUGO-Actor][sugo_actor_url] with key.
 
 ```javascript
 #!/usr/bin/env node
@@ -149,11 +169,11 @@ co(function * () {
 ```
 
 
-<!-- Section from "doc/guides/02.Usage.md.hbs" End -->
+<!-- Section from "doc/guides/22.Usage.md.hbs" End -->
 
-<!-- Section from "doc/guides/03.Tips.md.hbs" Start -->
+<!-- Section from "doc/guides/23.Tips.md.hbs" Start -->
 
-<a name="section-doc-guides-03-tips-md"></a>
+<a name="section-doc-guides-23-tips-md"></a>
 
 Tips
 ---------
@@ -206,7 +226,7 @@ co(function * () {
 
 ```
 
-<!-- Section from "doc/guides/03.Tips.md.hbs" End -->
+<!-- Section from "doc/guides/23.Tips.md.hbs" End -->
 
 
 <!-- Sections Start -->
