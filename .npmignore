@@ -35,3 +35,10 @@ node_modules
 tmp
 
 assets
+# SUGOS
+.*
+tmp
+ci
+doc
+example
+test
