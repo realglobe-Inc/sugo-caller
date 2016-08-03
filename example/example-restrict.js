@@ -19,7 +19,7 @@ const shellSchemaV2 = {
 }
 
 co(function * () {
-  let caller = sugoCaller('https://my-sugo-cloud.example.com/callers', {})
+  let caller = sugoCaller('https://my-sugo-hub.example.com/callers', {})
   let actor = yield caller.connect('my-actor-01')
 
   let shell

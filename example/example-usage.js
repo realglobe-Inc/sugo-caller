@@ -8,7 +8,7 @@
 const co = require('co')
 const sugoCaller = require('sugo-caller')
 
-const CLOUD_URL = 'https://my-sugo-cloud.example.com/callers'
+const CLOUD_URL = 'https://my-sugo-hub.example.com/callers'
 const TARGET_ACTOR_ID = 'my-actor-01'
 
 co(function * () {

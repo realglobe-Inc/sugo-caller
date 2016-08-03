@@ -46,7 +46,7 @@ Caller component of SUGOS.
 <a name="overview"></a>
 
 
-SUGO-Caller works as a client of [SUGO-Cloud][sugo_cloud_url] and provides accessors for remote [SUGO-Actor][sugo_actor_url] .
+SUGO-Caller works as a client of [SUGO-Hub][sugo_hub_url] and provides accessors for remote [SUGO-Actor][sugo_actor_url] .
  
 
 <!-- Overview End -->
@@ -123,7 +123,7 @@ $ npm install sugo-caller --save
 Usage
 ---------
 
-Create a caller instance with [SUGO-Cloud][sugo_cloud_url] url and connect to an [SUGO-Actor][sugo_actor_url] with key.
+Create a caller instance with [SUGO-Hub][sugo_hub_url] url and connect to an [SUGO-Actor][sugo_actor_url] with key.
 
 ```javascript
 #!/usr/bin/env node
@@ -136,7 +136,7 @@ Create a caller instance with [SUGO-Cloud][sugo_cloud_url] url and connect to an
 const co = require('co')
 const sugoCaller = require('sugo-caller')
 
-const CLOUD_URL = 'https://my-sugo-cloud.example.com/callers'
+const CLOUD_URL = 'https://my-sugo-hub.example.com/callers'
 const TARGET_ACTOR_ID = 'my-actor-01'
 
 co(function * () {
@@ -207,7 +207,7 @@ const shellSchemaV2 = {
 }
 
 co(function * () {
-  let caller = sugoCaller('https://my-sugo-cloud.example.com/callers', {})
+  let caller = sugoCaller('https://my-sugo-hub.example.com/callers', {})
   let actor = yield caller.connect('my-actor-01')
 
   let shell
@@ -249,11 +249,11 @@ Links
 ------
 
 + [sugos][sugos_url]
-+ [sugo-cloud][sugo_cloud_url]
++ [sugo-hub][sugo_hub_url]
 + [sugo-actor][sugo_actor_url]
 
 [sugos_url]: https://github.com/realglobe-Inc/sugos
-[sugo_cloud_url]: https://github.com/realglobe-Inc/sugo-cloud
+[sugo_hub_url]: https://github.com/realglobe-Inc/sugo-hub
 [sugo_actor_url]: https://github.com/realglobe-Inc/sugo-actor
 
 <!-- Links End -->
