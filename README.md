@@ -136,11 +136,13 @@ Create a caller instance with [SUGO-Hub][sugo_hub_url] url and connect to an [SU
 const co = require('co')
 const sugoCaller = require('sugo-caller')
 
-const CLOUD_URL = 'https://my-sugo-hub.example.com/callers'
 const TARGET_ACTOR_ID = 'my-actor-01'
 
 co(function * () {
-  let caller = sugoCaller(CLOUD_URL, {})
+  let caller = sugoCaller({
+    protocol: 'https',
+    hostname: 'my-sugo-hub.example.com'
+  })
 
 // Connect to the target actor
   let actor = yield caller.connect(TARGET_ACTOR_ID)
@@ -207,7 +209,7 @@ const shellSchemaV2 = {
 }
 
 co(function * () {
-  let caller = sugoCaller('https://my-sugo-hub.example.com/callers', {})
+  let caller = sugoCaller({ /* ... */ })
   let actor = yield caller.connect('my-actor-01')
 
   let shell
