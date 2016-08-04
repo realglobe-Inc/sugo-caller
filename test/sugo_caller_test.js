@@ -17,7 +17,7 @@ const { OK, NG } = AcknowledgeStatus
 const { PERFORM, PIPE, JOIN, LEAVE } = RemoteEvents
 
 describe('sugo-caller', function () {
-  this.timeout(4000)
+  this.timeout(16000)
 
   let port, server
   let sockets = {}
@@ -136,6 +136,21 @@ describe('sugo-caller', function () {
       }
       assert.ok(caught)
     }
+  }))
+
+  it('Bunch of instances', () => co(function * () {
+    let startAt = new Date()
+    let url = `http://localhost:${port}/callers`
+    let callers = Array.apply(null, new Array(10)).map(() => new SugoCaller(url, {}))
+    let actors = yield Promise.all(callers.map((caller) => caller.connect('hoge')))
+    for (let actor of actors) {
+      yield actor.disconnect()
+    }
+
+    for (let caller of callers) {
+      yield caller.disconnect()
+    }
+    console.log('took', new Date() - startAt)
   }))
 })
 
