@@ -140,8 +140,10 @@ describe('sugo-caller', function () {
 
   it('Bunch of instances', () => co(function * () {
     let startAt = new Date()
-    let url = `http://localhost:${port}/callers`
-    let callers = Array.apply(null, new Array(10)).map(() => new SugoCaller(url, {}))
+    let callers = Array.apply(null, new Array(10)).map(() => new SugoCaller({
+      port,
+      protocol: 'http'
+    }))
     let actors = yield Promise.all(callers.map((caller) => caller.connect('hoge')))
     for (let actor of actors) {
       yield actor.disconnect()
