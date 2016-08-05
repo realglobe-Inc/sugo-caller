@@ -51,6 +51,7 @@
     "filedel": "^2.0.4",
     "injectmock": "^2.0.0",
     "markdown-toc": "^0.12.16",
+    "sg-karma": "^1.0.4",
     "sg-socket": "^1.0.15",
     "sg-travis": "^1.1.27",
     "sugos-assets": "^2.0.3"
