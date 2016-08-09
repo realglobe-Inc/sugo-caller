@@ -154,6 +154,25 @@ describe('sugo-caller', function () {
     }
     console.log('took', new Date() - startAt)
   }))
+
+  it('Format url', () => co(function * () {
+    assert.equal(
+      SugoCaller.urlFromConfig({
+        protocol: 'https',
+        host: 'example.com'
+      }),
+      'https://example.com/callers'
+    )
+    assert.equal(
+      SugoCaller.urlFromConfig({
+        protocol: 'http',
+        hostname: 'example.com',
+        port: 3000,
+        pathname: 'hoge'
+      }),
+      'http://example.com:3000/hoge'
+    )
+  }))
 })
 
 /* global describe, before, after, it */
