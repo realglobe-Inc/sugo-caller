@@ -1,6 +1,6 @@
 {
   "name": "sugo-caller",
-  "version": "2.1.11",
+  "version": "2.1.12",
   "description": "Caller component of SUGOS.",
   "main": "lib",
   "browser": "shim/browser",
