@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/realglobe-Inc/sugo-caller#readme",
   "dependencies": {
+    "argx": "^3.0.1",
+    "bwindow": "^1.0.7",
     "co": "^4.6.0",
     "defaults": "^1.0.3",
     "sg-queue": "^1.0.1",
