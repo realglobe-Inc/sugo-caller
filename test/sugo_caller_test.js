@@ -106,7 +106,12 @@ describe('sugo-caller', function () {
     yield asleep(20)
 
     yield caller.disconnect('hoge')
-
+    // Describe module
+    {
+      let description = actor01.describe('bash')
+      assert.equal(description.name, 'bash')
+      assert.equal(description.desc, 'Bash module')
+    }
     // Try call after disconnected
     {
       let caught

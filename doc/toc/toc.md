@@ -3,5 +3,6 @@
 - [Usage](#usage)
 - [Tips](#tips)
   * [Restricting Connecting Modules](#restricting-connecting-modules)
+  * [Describing a Module](#describing-a-module)
 - [License](#license)
 - [Links](#links)
