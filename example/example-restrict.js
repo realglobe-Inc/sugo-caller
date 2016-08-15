@@ -30,7 +30,6 @@ co(function * () {
     })
   } catch (err) {
     console.error('Failed to access!!')
-    return
   }
   /* ... */
 }).catch((err) => console.error(err))
