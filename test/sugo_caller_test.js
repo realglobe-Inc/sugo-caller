@@ -45,6 +45,12 @@ describe('sugo-caller', function () {
                         { name: 'args', type: 'array', desc: 'Command arguments' },
                         { name: 'options', type: 'Object', desc: 'Optional settings' }
                       ]
+                    },
+                    get$state: {
+                      desc: 'Dynamic getter for state'
+                    },
+                    set$state: {
+                      desc: 'Dynamic setter for state'
                     }
                   }
                 }
