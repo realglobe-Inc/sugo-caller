@@ -10,6 +10,7 @@ const sgSocket = require('sg-socket')
 const asleep = require('asleep')
 const aport = require('aport')
 const co = require('co')
+const socketIOAuth = require('socketio-auth')
 
 const { RemoteEvents, AcknowledgeStatus } = require('sg-socket-constants')
 
@@ -24,7 +25,7 @@ describe('sugo-caller', function () {
   before(() => co(function * () {
     port = yield aport()
     server = sgSocket(port)
-    server.of('callers').on('connection', (socket) => {
+    let handle = (socket) => {
       sockets[ socket.id ] = socket
       socket
         .on(JOIN, (data, callback) => {
@@ -66,7 +67,17 @@ describe('sugo-caller', function () {
       socket.on(LEAVE, (data, callback) => {
         callback({ status: OK })
       })
+    }
+    let callerIO = server.of('/callers')
+    callerIO.on('connection', handle)
+    let callerAuthIO = server.of('/auth/callers')
+    socketIOAuth(callerAuthIO, {
+      authenticate (socket, data, callback) {
+        let valid = data.token === 'mytoken'
+        callback(null, valid)
+      }
     })
+    callerAuthIO.on('connection', handle)
   }))
 
   after(() => co(function * () {
@@ -164,6 +175,43 @@ describe('sugo-caller', function () {
       yield caller.disconnect()
     }
     console.log('took', new Date() - startAt)
+  }))
+
+  it('With auth', () => co(function * () {
+    let url = `http://localhost:${port}/auth/callers`
+
+    // Success
+    {
+      let caller = new SugoCaller(url, {
+        auth: { token: 'mytoken' }
+      })
+      let actor01 = yield caller.connect('hoge')
+      assert.ok(actor01.has('bash'))
+    }
+    // Success
+    {
+      let caller = new SugoCaller(url, {
+        auth: { token: '__invalid_token__' }
+      })
+      let caught
+      try {
+        let actor01 = yield caller.connect('hoge')
+      } catch (e) {
+        caught = e
+      }
+      assert.ok(caught)
+    }
+    // Without auth
+    {
+      let caller = new SugoCaller(url, {})
+      let caught
+      try {
+        let actor01 = yield caller.connect('hoge')
+      } catch (e) {
+        caught = e
+      }
+      assert.ok(caught)
+    }
   }))
 
   it('Format url', () => co(function * () {
