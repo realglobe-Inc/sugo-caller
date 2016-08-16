@@ -4,5 +4,6 @@
 - [Tips](#tips)
   * [Restricting Connecting Modules](#restricting-connecting-modules)
   * [Describing a Module](#describing-a-module)
+  * [Use auth](#use-auth)
 - [License](#license)
 - [Links](#links)
