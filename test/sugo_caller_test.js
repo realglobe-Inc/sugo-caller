@@ -225,7 +225,6 @@ describe('sugo-caller', function () {
     //   }
     //   assert.ok(caught)
     // }
-
   }))
 
   it('Format url', () => co(function * () {
@@ -258,7 +257,14 @@ describe('sugo-caller', function () {
       key: 'actor01',
       modules: {
         foo: new Module({
-          sayHi: (name) => `Hi!, ${name}`
+          sayHi: (name, date) => `Hi!, ${name}`,
+          handleDate (date) {
+            return {
+              given: date,
+              is: date instanceof Date,
+              new: new Date()
+            }
+          }
         })
       }
     })
@@ -269,8 +275,10 @@ describe('sugo-caller', function () {
     let description = actor01.describe('foo')
     assert.ok(description)
     let foo = actor01.get('foo')
-    let hi = yield foo.sayHi('Bess')
+    let hi = yield foo.sayHi('Bess', new Date())
     assert.equal(hi, 'Hi!, Bess')
+
+    let date = yield foo.handleDate(new Date())
 
     yield actor01.disconnect()
     yield asleep(10)
