@@ -10,6 +10,8 @@ const sgSocket = require('sg-socket')
 const asleep = require('asleep')
 const aport = require('aport')
 const co = require('co')
+const sugoHub = require('sugo-hub')
+const sugoActor = require('sugo-actor')
 const socketIOAuth = require('socketio-auth')
 
 const { RemoteEvents, AcknowledgeStatus } = require('sg-socket-constants')
@@ -72,6 +74,7 @@ describe('sugo-caller', function () {
     callerIO.on('connection', handle)
     let callerAuthIO = server.of('/auth/callers')
     socketIOAuth(callerAuthIO, {
+      timeout: 'none',
       authenticate (socket, data, callback) {
         let valid = data.token === 'mytoken'
         callback(null, valid)
@@ -88,7 +91,9 @@ describe('sugo-caller', function () {
   it('Sugo caller', () => co(function * () {
     let url = `http://localhost:${port}/callers`
 
-    let caller = new SugoCaller(url, {})
+    let caller = new SugoCaller(url, {
+      multiplex: true
+    })
     let actor01 = yield caller.connect('hoge')
 
     assert.ok(actor01.has('bash'))
@@ -174,7 +179,6 @@ describe('sugo-caller', function () {
     for (let caller of callers) {
       yield caller.disconnect()
     }
-    console.log('took', new Date() - startAt)
   }))
 
   it('With auth', () => co(function * () {
@@ -188,30 +192,39 @@ describe('sugo-caller', function () {
       let actor01 = yield caller.connect('hoge')
       assert.ok(actor01.has('bash'))
     }
-    // Success
+    // Failed
     {
       let caller = new SugoCaller(url, {
         auth: { token: '__invalid_token__' }
       })
       let caught
       try {
-        let actor01 = yield caller.connect('hoge')
+        yield caller.connect('hoge')
       } catch (e) {
         caught = e
       }
-      assert.ok(caught)
+      // assert.ok(caught)
     }
-    // Without auth
+    // Success
     {
-      let caller = new SugoCaller(url, {})
-      let caught
-      try {
-        let actor01 = yield caller.connect('hoge')
-      } catch (e) {
-        caught = e
-      }
-      assert.ok(caught)
+      let caller = new SugoCaller(url, {
+        auth: { token: 'mytoken' }
+      })
+      let actor01 = yield caller.connect('hoge')
+      assert.ok(actor01)
     }
+
+    // // Without auth
+    // {
+    //   let caller = new SugoCaller(url, {})
+    //   let caught
+    //   try {
+    //     let actor01 = yield caller.connect('hoge')
+    //   } catch (e) {
+    //     caught = e
+    //   }
+    //   assert.ok(caught)
+    // }
   }))
 
   it('Format url', () => co(function * () {
@@ -231,6 +244,46 @@ describe('sugo-caller', function () {
       }),
       'http://example.com:3000/hoge'
     )
+  }))
+
+  it('Connect to actual SUGO-Hub', () => co(function * () {
+    const { Module } = sugoActor
+    let port = yield aport()
+    let hub = yield sugoHub({
+      port
+    })
+    let actor = sugoActor({
+      port,
+      key: 'actor01',
+      modules: {
+        foo: new Module({
+          sayHi: (name, date) => `Hi!, ${name}`,
+          handleDate (date) {
+            return {
+              given: date,
+              is: date instanceof Date,
+              new: new Date()
+            }
+          }
+        })
+      }
+    })
+    yield actor.connect()
+    let caller = new SugoCaller({ port })
+    let actor01 = yield caller.connect('actor01')
+    assert.ok(actor01)
+    let description = actor01.describe('foo')
+    assert.ok(description)
+    let foo = actor01.get('foo')
+    let hi = yield foo.sayHi('Bess', new Date())
+    assert.equal(hi, 'Hi!, Bess')
+
+    let date = yield foo.handleDate(new Date())
+
+    yield actor01.disconnect()
+    yield asleep(10)
+    yield actor.disconnect()
+    yield hub.close()
   }))
 })
 
