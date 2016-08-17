@@ -10,6 +10,8 @@ const sgSocket = require('sg-socket')
 const asleep = require('asleep')
 const aport = require('aport')
 const co = require('co')
+const sugoHub = require('sugo-hub')
+const sugoActor = require('sugo-actor')
 const socketIOAuth = require('socketio-auth')
 
 const { RemoteEvents, AcknowledgeStatus } = require('sg-socket-constants')
@@ -231,6 +233,36 @@ describe('sugo-caller', function () {
       }),
       'http://example.com:3000/hoge'
     )
+  }))
+
+  it('Connect to actual SUGO-Hub', () => co(function * () {
+    const { Module } = sugoActor
+    let port = yield aport()
+    let hub = yield sugoHub({
+      port
+    })
+    let actor = sugoActor({
+      port,
+      key: 'actor01',
+      modules: {
+        foo: new Module({
+          sayHi: () => 'Hi!'
+        })
+      }
+    })
+    yield actor.connect()
+    let caller = new SugoCaller({ port })
+    let actor01 = yield caller.connect('actor01')
+    assert.ok(actor01)
+    let description = actor01.describe('foo')
+    assert.ok(description)
+    let foo = actor01.get('foo')
+    let hi = yield foo.sayHi()
+    assert.equal(hi, 'Hi!')
+
+    yield actor01.disconnect()
+    yield actor.disconnect()
+    yield hub.close()
   }))
 })
 
