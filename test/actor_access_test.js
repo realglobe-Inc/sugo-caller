@@ -32,6 +32,13 @@ describe('actor-access', () => {
               ]
             }
           }
+        },
+        'bash.subFoo': {
+          methods: {
+            bar: {
+              desc: 'Spawn of sub method'
+            }
+          }
         }
       },
       connector: {
@@ -47,6 +54,9 @@ describe('actor-access', () => {
     yield bash.spawn('ls', [ '-la' ])
     bash.emit('stdin', 'hoge')
     yield asleep(200)
+
+    assert.ok(bash.subFoo)
+    assert.ok(bash.subFoo.bar)
   }))
 })
 
