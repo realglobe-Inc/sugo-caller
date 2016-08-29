@@ -7,9 +7,28 @@ module.exports = {
   mode: '444',
   data: {
     get signature () {
-      let [classSignature] = commentsInFile(require.resolve('../../lib/sugo_caller'))
-      let { 'class':clazz, param:params, description } = classSignature
-      return { clazz: clazz[ 0 ], description, params }
+      let comments = commentsInFile(require.resolve('../../lib/sugo_caller'))
+      let methods = comments.filter((comment) => !!comment.method)
+      let { 'class':clazz, param:params, description } = comments[ 0 ]
+      let formatParam = ({ name, type, description }) => ({
+        name, type,
+        description: description.trim().replace(/^-/, '').trim()
+      })
+      return {
+        factory: {
+          clazz: clazz[ 0 ], description,
+          params: params.map(formatParam)
+        },
+        methods: methods.map(({ description, method, param:params, returns }) => {
+          let { name } = method[ 0 ]
+          return {
+            name,
+            params: params.map(formatParam),
+            description,
+            returns: returns[ 0 ]
+          }
+        })
+      }
     }
   }
 }

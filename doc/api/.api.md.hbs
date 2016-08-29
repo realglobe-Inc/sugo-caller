@@ -1,11 +1,24 @@
-## {{signature.clazz.name}}
+## `sugoCaller(config) -> SugoCaller`
 
-{{{signature.description}}}
+A factory method to create an sugo caller instance
 
-### Params
-
-| Name | Type | Description |
+| Param | Type | Description |
 | ----- | --- | -------- |
-{{#each signature.params}}
+{{#each signature.factory.params}}
 | {{name}} | {{type}} | {{{description}}} |
+{{/each}}
+
+
+{{#each signature.methods}}
+
+## `{{name}}({{#each params}}{{name}}{{#if @last}}{{else}}, {{/if}}{{/each}})` -> {{{returns.type}}}
+
+{{{description}}}
+
+| Param | Type | Description |
+| ----- | --- | -------- |
+{{#each params}}
+| {{name}} | {{type}} | {{{description}}} |
+{{/each}}
+
 {{/each}}

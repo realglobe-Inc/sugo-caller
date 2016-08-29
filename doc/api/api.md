@@ -1,9 +1,31 @@
-## SugoCaller
+## `sugoCaller(config) -> SugoCaller`
 
-Caller to access remote actor
+A factory method to create an sugo caller instance
 
-### Params
-
-| Name | Type | Description |
+| Param | Type | Description |
 | ----- | --- | -------- |
-| URL | string|Object | - Hub url to connect |
+| config | Object | Caller configuration |
+| config.protocol | string | Protocol to use ( "http" or "https" ) |
+| config.host | string | Hub host name. ( eg: "localhost:3000" ) |
+| config.pathname | string | Hub URL path name ( eg: "/callers" ) |
+| config.auth | Object | Auth data for hub |
+
+
+
+## `connect(key)` -> Promise.<Object>
+
+Connect to actor
+
+| Param | Type | Description |
+| ----- | --- | -------- |
+| key | string | Key of actor |
+
+
+## `disconnect(key)` -> Promise
+
+Disconnect from cloud server
+
+| Param | Type | Description |
+| ----- | --- | -------- |
+| key | string | Key of actor to connect |
+
