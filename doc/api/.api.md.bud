@@ -1,0 +1,19 @@
+'use strict'
+
+const { commentsInFile } = require('ape-doc')
+
+module.exports = {
+  force: true,
+  mode: '444',
+  data: {
+    get signature () {
+      let [classSignature] = commentsInFile(require.resolve('../../lib/sugo_caller'))
+      let { 'class':clazz, param:params, description } = classSignature
+      return { clazz: clazz[ 0 ], description, params }
+    }
+  }
+}
+
+if (!module.parent) {
+  require('coz').render(__filename)
+}

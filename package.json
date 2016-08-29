@@ -40,6 +40,7 @@
     "ababel": "^1.1.2",
     "ababel-es2015": "^1.0.6",
     "amocha": "^1.0.14",
+    "ape-doc": "^2.0.4",
     "ape-formatting": "^1.0.0",
     "ape-releasing": "^4.0.4",
     "ape-reporting": "^3.0.2",
@@ -57,7 +58,7 @@
     "sg-socket": "^1.0.15",
     "sg-travis": "^1.1.29",
     "socketio-auth": "0.0.5",
-    "sugo-actor": "^4.2.6",
+    "sugo-actor": "*",
     "sugo-hub": "^3.0.17",
     "sugos-assets": "^2.0.3"
   },
