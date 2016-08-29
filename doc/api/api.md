@@ -12,7 +12,7 @@ A factory method to create an sugo caller instance
 
 
 
-## `connect(key)` -> Promise.<Object>
+## `caller.connect(key) -> Promise.<Object>`
 
 Connect to actor
 
@@ -21,7 +21,7 @@ Connect to actor
 | key | string | Key of actor |
 
 
-## `disconnect(key)` -> Promise
+## `caller.disconnect(key) -> Promise`
 
 Disconnect from cloud server
 
