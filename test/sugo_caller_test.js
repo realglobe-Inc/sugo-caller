@@ -264,6 +264,9 @@ describe('sugo-caller', function () {
               is: date instanceof Date,
               new: new Date()
             }
+          },
+          handleFunc () {
+
           }
         })
       }
@@ -279,6 +282,8 @@ describe('sugo-caller', function () {
     assert.equal(hi, 'Hi!, Bess')
 
     let date = yield foo.handleDate(new Date())
+    assert.ok(date)
+    yield foo.handleFunc(() => 'year!')
 
     yield actor01.disconnect()
     yield asleep(10)
