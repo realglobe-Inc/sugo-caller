@@ -382,7 +382,24 @@
       "constructor": {
         "name": "ActorAccessModule",
         "description": "Loaded module for an actor.\nThis class provides pseudo interfaces for remote actor module",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "methods",
+            "type": "Object",
+            "description": "Actor specifications for module methods",
+            "default": "",
+            "optional": "",
+            "nullable": ""
+          },
+          {
+            "name": "connection",
+            "type": "Object",
+            "description": "Actor connections",
+            "default": "",
+            "optional": "",
+            "nullable": ""
+          }
+        ],
         "examples": []
       }
     }

@@ -4,19 +4,19 @@ Caller component of SUGOS.
 
 + Functions
   + [sugoCaller(config)](#sugo-caller-function-sugo-caller)
-+ SugoCaller Class
++ [SugoCaller](sugo-caller-classes) Class
   + [new SugoCaller(config)](#sugo-caller-classes-sugo-caller-constructor)
   + [caller.connect(key)](#sugo-caller-classes-sugo-caller-connect)
   + [caller.disconnect(key)](#sugo-caller-classes-sugo-caller-disconnect)
-+ ActorAccessBundle Class
++ [ActorAccessBundle](sugo-caller-classes) Class
   + [new ActorAccessBundle()](#sugo-caller-classes-actor-access-bundle-constructor)
   + [bundle.get(moduleName, options)](#sugo-caller-classes-actor-access-bundle-get)
   + [bundle.has(moduleName)](#sugo-caller-classes-actor-access-bundle-has)
   + [bundle.set(moduleName, module, options)](#sugo-caller-classes-actor-access-bundle-set)
   + [bundle.del(moduleName)](#sugo-caller-classes-actor-access-bundle-del)
   + [bundle.names()](#sugo-caller-classes-actor-access-bundle-names)
-+ ActorAccessModule Class
-  + [new ActorAccessModule()](#sugo-caller-classes-actor-access-module-constructor)
++ [ActorAccessModule](sugo-caller-classes) Class
+  + [new ActorAccessModule(methods, connection)](#sugo-caller-classes-actor-access-module-constructor)
 
 ## Functions
 
@@ -39,6 +39,7 @@ co(function * () {
 ```
 
 
+<a name="sugo-caller-classes"/>
 ## SugoCaller Class
 
 Hub client for caller side.
@@ -80,6 +81,7 @@ Disconnect from cloud server
 | key | string | Key of actor to connect |
 
 
+<a name="sugo-caller-classes"/>
 ## ActorAccessBundle Class
 
 Bundle for actor access.
@@ -141,6 +143,7 @@ Delete module
 
 Get names of modules
 
+<a name="sugo-caller-classes"/>
 ## ActorAccessModule Class
 
 Loaded module for an actor.
@@ -148,10 +151,14 @@ This class provides pseudo interfaces for remote actor module
 
 
 <a name="sugo-caller-classes-actor-access-module-constructor" />
-### new ActorAccessModule()
+### new ActorAccessModule(methods, connection)
 
 Constructor of ActorAccessModule class
 
+| Param | Type | Description |
+| ----- | --- | -------- |
+| methods | Object | Actor specifications for module methods |
+| connection | Object | Actor connections |
 
 
 
