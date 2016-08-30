@@ -1,5 +1,130 @@
 {
+  "functions": [
+    {
+      "name": "create",
+      "access": "",
+      "virtual": false,
+      "description": "Create a caller instance",
+      "parameters": [],
+      "examples": [],
+      "returns": {
+        "type": "Object",
+        "description": ""
+      }
+    },
+    {
+      "name": "authorize",
+      "access": "",
+      "virtual": false,
+      "description": "Authorize socket",
+      "parameters": [],
+      "examples": [],
+      "returns": {
+        "type": "Promise",
+        "description": ""
+      }
+    }
+  ],
   "classes": [
+    {
+      "name": "SugoCaller",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "SugoCaller",
+        "description": "Caller to access remote actor",
+        "parameters": [
+          {
+            "name": "config",
+            "type": "Object",
+            "description": "Caller configuration",
+            "default": "",
+            "optional": "",
+            "nullable": ""
+          },
+          {
+            "name": "config.protocol",
+            "type": "string",
+            "description": "Protocol to use ( \"http\" or \"https\" )",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "config.host",
+            "type": "string",
+            "description": "Hub host name. ( eg: \"localhost:3000\" )",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "config.pathname",
+            "type": "string",
+            "description": "Hub URL path name ( eg: \"/callers\" )",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "config.auth",
+            "type": "Object",
+            "description": "Auth data for hub",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          }
+        ],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "connect",
+          "access": "",
+          "virtual": false,
+          "description": "Connect to actor",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key of actor",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<ActorAccessBundle>",
+            "description": "- Actor accessor"
+          }
+        },
+        {
+          "name": "disconnect",
+          "access": "",
+          "virtual": false,
+          "description": "Disconnect from cloud server",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key of actor to connect",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        }
+      ]
+    },
     {
       "name": "ActorAccess",
       "description": "",
@@ -73,10 +198,81 @@
       },
       "functions": [
         {
+          "name": "get",
+          "access": "",
+          "virtual": false,
+          "description": "Get a module",
+          "parameters": [
+            {
+              "name": "moduleName",
+              "type": "string",
+              "description": "Name of module",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Module",
+            "description": "- Found module"
+          }
+        },
+        {
+          "name": "has",
+          "access": "",
+          "virtual": false,
+          "description": "Check if module exists",
+          "parameters": [
+            {
+              "name": "moduleName",
+              "type": "string",
+              "description": "Name of module",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Boolean",
+            "description": "- Has the module or not"
+          }
+        },
+        {
+          "name": "describe",
+          "access": "",
+          "virtual": false,
+          "description": "Describe a module",
+          "parameters": [
+            {
+              "name": "moduleName",
+              "type": "string",
+              "description": "Name of module",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Object",
+            "description": "- Module description"
+          }
+        },
+        {
           "name": "set",
           "access": "",
           "virtual": false,
-          "description": "Set module",
+          "description": "Set a module",
           "parameters": [
             {
               "name": "moduleName",
@@ -135,153 +331,6 @@
           }
         }
       ]
-    },
-    {
-      "name": "CallerValidator",
-      "description": "",
-      "extends": [],
-      "access": "",
-      "virtual": false,
-      "fires": "",
-      "constructor": {
-        "name": "CallerValidator",
-        "description": "Validator for caller",
-        "parameters": [],
-        "examples": []
-      },
-      "functions": [
-        {
-          "name": "validateInterfaceSpecs",
-          "access": "",
-          "virtual": false,
-          "description": "Validate spec of module",
-          "parameters": [
-            {
-              "name": "specs",
-              "type": "Object",
-              "description": "",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": [],
-          "returns": {
-            "type": "Error",
-            "description": "- Found errors"
-          }
-        },
-        {
-          "name": "validateInterfaceSpecWithExpected",
-          "access": "",
-          "virtual": false,
-          "description": "Validate spec of module with expected schema",
-          "parameters": [
-            {
-              "name": "$spec",
-              "type": "Object",
-              "description": "Specs to validate",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            },
-            {
-              "name": "expected",
-              "type": "Object",
-              "description": "JSON schema for expectation",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": []
-        }
-      ]
-    }
-  ],
-  "functions": [
-    {
-      "name": "get",
-      "access": "",
-      "virtual": false,
-      "description": "Get a module",
-      "parameters": [
-        {
-          "name": "moduleName",
-          "type": "string",
-          "description": "Name of module",
-          "default": "",
-          "optional": "",
-          "nullable": ""
-        },
-        {
-          "name": "options",
-          "type": "Object",
-          "description": "Optional settings",
-          "default": "{}",
-          "optional": true,
-          "nullable": ""
-        }
-      ],
-      "examples": [],
-      "returns": {
-        "type": "Module",
-        "description": "- Found module"
-      }
-    },
-    {
-      "name": "has",
-      "access": "",
-      "virtual": false,
-      "description": "Check if module exists",
-      "parameters": [
-        {
-          "name": "moduleName",
-          "type": "string",
-          "description": "Name of module",
-          "default": "",
-          "optional": "",
-          "nullable": ""
-        }
-      ],
-      "examples": [],
-      "returns": {
-        "type": "Boolean",
-        "description": "- Has the module or not"
-      }
-    },
-    {
-      "name": "describe",
-      "access": "",
-      "virtual": false,
-      "description": "Describe a module",
-      "parameters": [
-        {
-          "name": "moduleName",
-          "type": "string",
-          "description": "Name of module",
-          "default": "",
-          "optional": "",
-          "nullable": ""
-        }
-      ],
-      "examples": [],
-      "returns": {
-        "type": "Object",
-        "description": "- Module description"
-      }
-    },
-    {
-      "name": "authorize",
-      "access": "",
-      "virtual": false,
-      "description": "Authorize socket",
-      "parameters": [],
-      "examples": [],
-      "returns": {
-        "type": "Promise",
-        "description": ""
-      }
     }
   ]
 }

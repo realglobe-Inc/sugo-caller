@@ -20,7 +20,7 @@ describe('validators', function () {
   }))
 
   it('Validators', () => co(function * () {
-
+    assert.ok(validators)
   }))
 })
 

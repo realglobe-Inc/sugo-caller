@@ -1,33 +1,23 @@
 'use strict'
 
-const { commentsInFile } = require('ape-doc')
+const jsdoc = require('../../jsdoc.json')
 
 module.exports = {
   force: true,
   mode: '444',
   data: {
     get signature () {
-      let comments = commentsInFile(require.resolve('../../lib/sugo_caller'))
-      let methods = comments.filter((comment) => !!comment.method)
-      let { 'class':clazz, param:params, description } = comments[ 0 ]
-      let formatParam = ({ name, type, description }) => ({
-        name, type,
-        description: description.trim().replace(/^-/, '').trim()
-      })
+      const byName = (list) => list.reduce((result, item) => Object.assign(result, {
+        [item.name]: item
+      }), {})
+      let classes = byName(jsdoc[ 'classes' ])
+      let { SugoCaller, ActorAccessBundle } = classes
+      let functions = byName(jsdoc[ 'functions' ])
       return {
-        factory: {
-          clazz: clazz[ 0 ], description,
-          params: params.map(formatParam)
-        },
-        methods: methods.map(({ description, method, param:params, returns }) => {
-          let { name } = method[ 0 ]
-          return {
-            name,
-            params: params.map(formatParam),
-            description,
-            returns: returns[ 0 ]
-          }
-        })
+        classes: [
+          SugoCaller, ActorAccessBundle
+        ],
+        functions
       }
     }
   }

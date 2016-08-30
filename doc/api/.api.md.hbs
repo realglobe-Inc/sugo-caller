@@ -4,21 +4,39 @@ A factory method to create an sugo caller instance
 
 | Param | Type | Description |
 | ----- | --- | -------- |
-{{#each signature.factory.params}}
+{{#each signature.classes.0.constructor.parameters}}
 | {{name}} | {{type}} | {{{description}}} |
 {{/each}}
 
 
-{{#each signature.methods}}
+{{#each signature.classes}}
+{{#with constructor}}
 
-## `caller.{{name}}({{#each params}}{{name}}{{#if @last}}{{else}}, {{/if}}{{/each}}) -> {{{returns.type}}}`
-
-{{{description}}}
+## `new {{../name}}()`
 
 | Param | Type | Description |
 | ----- | --- | -------- |
-{{#each params}}
+{{#each parameters}}
 | {{name}} | {{type}} | {{{description}}} |
 {{/each}}
 
+{{/with}}
+{{#each functions}}
+
+## `{{../name}}#{{name}}({{#each parameters}}{{name}}{{#if @last}}{{else}}, {{/if}}{{/each}}){{#if returns.type}} -> {{{returns.type}}}{{/if}}`
+
+{{{description}}}
+{{#if parameters}}
+
+| Param | Type | Description |
+| ----- | --- | -------- |
+{{#each parameters}}
+| {{name}} | {{type}} | {{{description}}} |
 {{/each}}
+
+{{/if}}
+{{/each}}
+{{/each}}
+
+
+
