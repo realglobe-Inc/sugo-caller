@@ -1,0 +1,259 @@
+{
+  "classes": [
+    {
+      "name": "ActorAccess",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ActorAccess",
+        "description": "Access to actor module",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "newBundle",
+          "access": "",
+          "virtual": false,
+          "description": "Create a new bundle.",
+          "parameters": [
+            {
+              "name": "specs",
+              "type": "Object",
+              "description": "Spec data of actor",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "validator",
+              "type": "Object",
+              "description": "A caller validator",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Object",
+            "description": ""
+          }
+        },
+        {
+          "name": "registerSpecs",
+          "access": "",
+          "virtual": false,
+          "description": "Register module specs.",
+          "parameters": [
+            {
+              "name": "specs",
+              "type": "Object",
+              "description": "Spec data of actor",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "connector",
+              "type": "Object",
+              "description": "Connector functions",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        },
+        {
+          "name": "deregisterSpecs",
+          "access": "",
+          "virtual": false,
+          "description": "De-register module specs.",
+          "parameters": [
+            {
+              "name": "moduleNames",
+              "type": "string",
+              "description": "Spec data of actor",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        }
+      ]
+    },
+    {
+      "name": "CallerValidator",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "CallerValidator",
+        "description": "Validator for caller",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "validateInterfaceSpecs",
+          "access": "",
+          "virtual": false,
+          "description": "Validate spec of module",
+          "parameters": [
+            {
+              "name": "specs",
+              "type": "Object",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Error",
+            "description": "- Found errors"
+          }
+        },
+        {
+          "name": "validateInterfaceSpecWithExpected",
+          "access": "",
+          "virtual": false,
+          "description": "Validate spec of module with expected schema",
+          "parameters": [
+            {
+              "name": "$spec",
+              "type": "Object",
+              "description": "Specs to validate",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "expected",
+              "type": "Object",
+              "description": "JSON schema for expectation",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get",
+      "access": "",
+      "virtual": false,
+      "description": "Get a module",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Name of module",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": [],
+      "returns": {
+        "type": "Module",
+        "description": "- Found module"
+      }
+    },
+    {
+      "name": "has",
+      "access": "",
+      "virtual": false,
+      "description": "Check if module exists",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Name of module",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": [],
+      "returns": {
+        "type": "Boolean",
+        "description": "- Has the module or not"
+      }
+    },
+    {
+      "name": "describe",
+      "access": "",
+      "virtual": false,
+      "description": "Describe a module",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Name of module",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": [],
+      "returns": {
+        "type": "Object",
+        "description": "- Module description"
+      }
+    },
+    {
+      "name": "actorAccessModule",
+      "access": "",
+      "virtual": false,
+      "description": "Create a module no actor access",
+      "parameters": [
+        {
+          "name": "methods",
+          "type": "Object",
+          "description": "Module methods",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        },
+        {
+          "name": "connection",
+          "type": "Object",
+          "description": "Hub connection",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": [],
+      "returns": {
+        "type": "Object",
+        "description": "- Defined module"
+      }
+    },
+    {
+      "name": "authorize",
+      "access": "",
+      "virtual": false,
+      "description": "Authorize socket",
+      "parameters": [],
+      "examples": [],
+      "returns": {
+        "type": "Promise",
+        "description": ""
+      }
+    }
+  ]
+}
