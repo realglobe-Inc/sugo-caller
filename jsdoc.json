@@ -1,14 +1,23 @@
 {
   "functions": [
     {
-      "name": "create",
+      "name": "sugoCaller",
       "access": "",
       "virtual": false,
-      "description": "Create a caller instance",
-      "parameters": [],
+      "description": "Create a caller instance. This is just an alias of `new SugoCaller(config)`",
+      "parameters": [
+        {
+          "name": "config",
+          "type": "Object",
+          "description": "Sugo caller configuration",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
       "examples": [],
       "returns": {
-        "type": "Object",
+        "type": "SugoCaller",
         "description": ""
       }
     },

@@ -1,23 +1,31 @@
 'use strict'
 
 const jsdoc = require('../../jsdoc.json')
+const { snakecase } = require('stringcase')
 
 module.exports = {
   force: true,
   mode: '444',
   data: {
+    pkg: require('../../package.json'),
     get signature () {
-      const byName = (list) => list.reduce((result, item) => Object.assign(result, {
-        [item.name]: item
+      const asClass = (item) => Object.assign({}, item, {
+        instanceName: snakecase(item.name).split('_').pop()
+      })
+      const byName = (list, { wrapper = (item) => item }) => list.reduce((result, item) => Object.assign(result, {
+        [item.name]: wrapper(item)
       }), {})
-      let classes = byName(jsdoc[ 'classes' ])
+      let classes = byName(jsdoc[ 'classes' ], { wrapper: asClass })
       let { SugoCaller, ActorAccessBundle } = classes
-      let functions = byName(jsdoc[ 'functions' ])
+      let functions = byName(jsdoc[ 'functions' ], {})
+      let { sugoCaller } = functions
       return {
         classes: [
           SugoCaller, ActorAccessBundle
         ],
-        functions
+        functions: [
+          sugoCaller
+        ]
       }
     }
   }

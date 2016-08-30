@@ -1,18 +1,48 @@
-## `sugoCaller(config) -> SugoCaller`
+# {{pkg.name}}@{{pkg.version}}
 
-A factory method to create an sugo caller instance
+{{pkg.description}}
+
+{{#each signature.functions}}
++ [{{name}}({{#each parameters}}{{name}}{{#if @last}}{{else}}, {{/if}}{{/each}})](#{{{spinalcase ../pkg.name}}}-function-{{spinalcase name}})
+{{/each}}
+{{#each signature.classes}}
++ {{name}}
+{{#with constructor}}
+  + [new {{../name}}()](#{{{spinalcase ../../pkg.name}}}-classes-{{spinalcase ../name}}-constructor)
+{{/with}}
+{{#each functions}}
+  + [{{../instanceName}}.{{name}}({{#each parameters}}{{name}}{{#if @last}}{{else}}, {{/if}}{{/each}})](#{{{spinalcase ../../pkg.name}}}-classes-{{spinalcase ../name}}-{{name}})
+{{/each}}
+{{/each}}
+
+{{#each signature.functions}}
+<a name="{{{spinalcase ../pkg.name}}}-function-{{spinalcase name}}" />
+## {{name}}({{#each parameters}}{{name}}{{#if @last}}{{else}}, {{/if}}{{/each}}){{#if returns.type}} -> `{{{returns.type}}}`{{/if}}
+
+{{{description}}}
+{{#if parameters}}
 
 | Param | Type | Description |
 | ----- | --- | -------- |
-{{#each signature.classes.0.constructor.parameters}}
+{{#each parameters}}
 | {{name}} | {{type}} | {{{description}}} |
 {{/each}}
 
+{{/if}}
+{{/each}}
 
 {{#each signature.classes}}
+
+## {{name}}
+
+{{description}}{{constructor.description}}
+
 {{#with constructor}}
 
-## `new {{../name}}()`
+<a name="{{{spinalcase ../../pkg.name}}}-classes-{{spinalcase ../name}}-constructor" />
+### new {{../name}}()
+
+Constructor of {{../name}} class
 
 | Param | Type | Description |
 | ----- | --- | -------- |
@@ -23,7 +53,8 @@ A factory method to create an sugo caller instance
 {{/with}}
 {{#each functions}}
 
-## `{{../name}}#{{name}}({{#each parameters}}{{name}}{{#if @last}}{{else}}, {{/if}}{{/each}}){{#if returns.type}} -> {{{returns.type}}}{{/if}}`
+<a name="{{{spinalcase ../../pkg.name}}}-classes-{{spinalcase ../name}}-{{name}}" />
+### {{../name}}#{{name}}({{#each parameters}}{{name}}{{#if @last}}{{else}}, {{/if}}{{/each}}){{#if returns.type}} -> `{{{returns.type}}}`{{/if}}
 
 {{{description}}}
 {{#if parameters}}
