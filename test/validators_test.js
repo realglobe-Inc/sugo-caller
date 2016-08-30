@@ -1,14 +1,16 @@
 /**
- * Test case for ActorValidator.
+ * Test case for validators.
  * Runs with mocha.
  */
 'use strict'
 
-const ActorValidator = require('../lib/validating/caller_validator.js')
+const validators = require('../lib/validators.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('caller-validator', () => {
+describe('validators', function () {
+  this.timeout(3000)
+
   before(() => co(function * () {
 
   }))
@@ -17,8 +19,8 @@ describe('caller-validator', () => {
 
   }))
 
-  it('Terminal validator', () => co(function * () {
-    assert.ok(new ActorValidator())
+  it('Validators', () => co(function * () {
+
   }))
 })
 

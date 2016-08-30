@@ -9,40 +9,11 @@
       "fires": "",
       "constructor": {
         "name": "ActorAccess",
-        "description": "Access to actor module",
+        "description": "Access for actors.",
         "parameters": [],
         "examples": []
       },
       "functions": [
-        {
-          "name": "newBundle",
-          "access": "",
-          "virtual": false,
-          "description": "Create a new bundle.",
-          "parameters": [
-            {
-              "name": "specs",
-              "type": "Object",
-              "description": "Spec data of actor",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            },
-            {
-              "name": "validator",
-              "type": "Object",
-              "description": "A caller validator",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": [],
-          "returns": {
-            "type": "Object",
-            "description": ""
-          }
-        },
         {
           "name": "registerSpecs",
           "access": "",
@@ -84,6 +55,84 @@
             }
           ],
           "examples": []
+        }
+      ]
+    },
+    {
+      "name": "ActorAccessBundle",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ActorAccessBundle",
+        "description": "Bundle for actor access.",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "set",
+          "access": "",
+          "virtual": false,
+          "description": "Set module",
+          "parameters": [
+            {
+              "name": "moduleName",
+              "type": "string",
+              "description": "Name of module",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "module",
+              "type": "Object",
+              "description": "Module to set",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        },
+        {
+          "name": "del",
+          "access": "",
+          "virtual": false,
+          "description": "Delete module",
+          "parameters": [
+            {
+              "name": "moduleName",
+              "type": "string",
+              "description": "Name of module",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        },
+        {
+          "name": "names",
+          "access": "",
+          "virtual": false,
+          "description": "Get names of modules",
+          "parameters": [],
+          "examples": [],
+          "returns": {
+            "type": "Array.<string>",
+            "description": ""
+          }
         }
       ]
     },
@@ -158,11 +207,19 @@
       "description": "Get a module",
       "parameters": [
         {
-          "name": "name",
+          "name": "moduleName",
           "type": "string",
           "description": "Name of module",
           "default": "",
           "optional": "",
+          "nullable": ""
+        },
+        {
+          "name": "options",
+          "type": "Object",
+          "description": "Optional settings",
+          "default": "{}",
+          "optional": true,
           "nullable": ""
         }
       ],
@@ -179,7 +236,7 @@
       "description": "Check if module exists",
       "parameters": [
         {
-          "name": "name",
+          "name": "moduleName",
           "type": "string",
           "description": "Name of module",
           "default": "",
@@ -200,7 +257,7 @@
       "description": "Describe a module",
       "parameters": [
         {
-          "name": "name",
+          "name": "moduleName",
           "type": "string",
           "description": "Name of module",
           "default": "",
@@ -212,35 +269,6 @@
       "returns": {
         "type": "Object",
         "description": "- Module description"
-      }
-    },
-    {
-      "name": "actorAccessModule",
-      "access": "",
-      "virtual": false,
-      "description": "Create a module no actor access",
-      "parameters": [
-        {
-          "name": "methods",
-          "type": "Object",
-          "description": "Module methods",
-          "default": "",
-          "optional": "",
-          "nullable": ""
-        },
-        {
-          "name": "connection",
-          "type": "Object",
-          "description": "Hub connection",
-          "default": "",
-          "optional": "",
-          "nullable": ""
-        }
-      ],
-      "examples": [],
-      "returns": {
-        "type": "Object",
-        "description": "- Defined module"
       }
     },
     {

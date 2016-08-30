@@ -10,9 +10,11 @@ before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 install:
+- npm install jsdoc -g
 - npm install
 script:
 - ./ci/build.js
+- ./ci/doc.js
 - ./ci/test.js
 - ./ci/test_browser.js
 - ./ci/cover.js
