@@ -4,7 +4,7 @@
       "name": "sugoCaller",
       "access": "",
       "virtual": false,
-      "description": "Create a caller instance. This is just an alias of `new SugoCaller(config)`",
+      "description": "Create a caller instance. Just an alias of `new SugoCaller(config)`",
       "parameters": [
         {
           "name": "config",
@@ -15,10 +15,62 @@
           "nullable": ""
         }
       ],
-      "examples": [],
+      "examples": [
+        "co(function * () {\n  let caller = sugoCaller({})\n  let actor01 = yield caller.connect('my-actor-01')\n  let foo = actor01.get('foo') // Get a module of actor\n  yield foo.sayYeah() // Call the remote function\n}).catch((err) => console.error(err))"
+      ],
       "returns": {
         "type": "SugoCaller",
         "description": ""
+      }
+    },
+    {
+      "name": "describe",
+      "access": "",
+      "virtual": false,
+      "description": "Describe a module",
+      "parameters": [
+        {
+          "name": "moduleName",
+          "type": "string",
+          "description": "Name of module",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": [],
+      "returns": {
+        "type": "Object",
+        "description": "- Module description"
+      }
+    },
+    {
+      "name": "actorAccessModule",
+      "access": "",
+      "virtual": false,
+      "description": "Create a module no actor access",
+      "parameters": [
+        {
+          "name": "methods",
+          "type": "Object",
+          "description": "Module methods",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        },
+        {
+          "name": "connection",
+          "type": "Object",
+          "description": "Hub connection",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": [],
+      "returns": {
+        "type": "Object",
+        "description": "- Defined module"
       }
     },
     {
@@ -44,7 +96,7 @@
       "fires": "",
       "constructor": {
         "name": "SugoCaller",
-        "description": "Caller to access remote actor",
+        "description": "Hub client for caller side.\nWhen you connect to remote actor with a caller, it receives specification of the actor and dynamically define function kick actor side function.\nThis way you can magically call functions declared on remote as if they were here.",
         "parameters": [
           {
             "name": "config",
@@ -201,7 +253,7 @@
       "fires": "",
       "constructor": {
         "name": "ActorAccessBundle",
-        "description": "Bundle for actor access.",
+        "description": "Bundle for actor access.\nThis class provides access for loaded modules on actor.",
         "parameters": [],
         "examples": []
       },
@@ -231,7 +283,7 @@
           ],
           "examples": [],
           "returns": {
-            "type": "Module",
+            "type": "ActorAccessModule",
             "description": "- Found module"
           }
         },
@@ -257,31 +309,10 @@
           }
         },
         {
-          "name": "describe",
-          "access": "",
-          "virtual": false,
-          "description": "Describe a module",
-          "parameters": [
-            {
-              "name": "moduleName",
-              "type": "string",
-              "description": "Name of module",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": [],
-          "returns": {
-            "type": "Object",
-            "description": "- Module description"
-          }
-        },
-        {
           "name": "set",
           "access": "",
           "virtual": false,
-          "description": "Set a module",
+          "description": "Set module",
           "parameters": [
             {
               "name": "moduleName",
@@ -293,7 +324,7 @@
             },
             {
               "name": "module",
-              "type": "Object",
+              "type": "ActorAccessModule",
               "description": "Module to set",
               "default": "",
               "optional": "",
@@ -340,6 +371,20 @@
           }
         }
       ]
+    },
+    {
+      "name": "ActorAccessModule",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ActorAccessModule",
+        "description": "Loaded module for an actor.\nThis class provides pseudo interfaces for remote actor module",
+        "parameters": [],
+        "examples": []
+      }
     }
   ]
 }
