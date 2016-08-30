@@ -249,9 +249,7 @@ describe('sugo-caller', function () {
   it('Connect to actual SUGO-Hub', () => co(function * () {
     const { Module } = sugoActor
     let port = yield aport()
-    let hub = yield sugoHub({
-      port
-    })
+    let hub = yield sugoHub({}).listen(port)
     let actor = sugoActor({
       port,
       key: 'actor01',
