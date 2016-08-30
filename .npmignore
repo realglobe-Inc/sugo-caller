@@ -37,8 +37,8 @@ tmp
 assets
 # SUGOS
 .*
-tmp
 ci
 doc
+!doc/guides
 example
 test
