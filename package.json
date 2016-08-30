@@ -60,7 +60,7 @@
     "socketio-auth": "0.0.5",
     "stringcase": "^3.0.1",
     "sugo-actor": "^4.3.1",
-    "sugo-hub": "^3.0.17",
+    "sugo-hub": "^4.0.1",
     "sugos-assets": "^2.0.3",
     "writeout": "^2.0.7"
   },
