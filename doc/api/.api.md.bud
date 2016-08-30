@@ -18,8 +18,8 @@ module.exports = {
         functions: (item.functions || []).map((func) => Object.assign(func, {
           paramDesc: paramDesc(func)
         })),
-        constructor: Object.assign(constructor, {
-          paramDesc: paramDesc(constructor)
+        constructor: Object.assign(item.constructor, {
+          paramDesc: paramDesc(item.constructor)
         }),
         instanceName: snakecase(item.name).split('_').pop()
       })

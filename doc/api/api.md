@@ -5,7 +5,7 @@ Caller component of SUGOS.
 + Functions
   + [sugoCaller(config)](#sugo-caller-function-sugo-caller)
 + SugoCaller Class
-  + [new SugoCaller()](#sugo-caller-classes-sugo-caller-constructor)
+  + [new SugoCaller(config)](#sugo-caller-classes-sugo-caller-constructor)
   + [caller.connect(key)](#sugo-caller-classes-sugo-caller-connect)
   + [caller.disconnect(key)](#sugo-caller-classes-sugo-caller-disconnect)
 + ActorAccessBundle Class
@@ -41,14 +41,23 @@ co(function * () {
 
 ## SugoCaller Class
 
-
+Hub client for caller side.
+When you connect to remote actor with a caller, it receives specification of the actor and dynamically define function kick actor side function.
+This way you can magically call functions declared on remote as if they were here.
 
 
 <a name="sugo-caller-classes-sugo-caller-constructor" />
-### new SugoCaller()
+### new SugoCaller(config)
 
 Constructor of SugoCaller class
 
+| Param | Type | Description |
+| ----- | --- | -------- |
+| config | Object | Caller configuration |
+| config.protocol | string | Protocol to use ( "http" or "https" ) |
+| config.host | string | Hub host name. ( eg: "localhost:3000" ) |
+| config.pathname | string | Hub URL path name ( eg: "/callers" ) |
+| config.auth | Object | Auth data for hub |
 
 
 <a name="sugo-caller-classes-sugo-caller-connect" />
@@ -73,7 +82,8 @@ Disconnect from cloud server
 
 ## ActorAccessBundle Class
 
-
+Bundle for actor access.
+This class provides access for loaded modules on actor.
 
 
 <a name="sugo-caller-classes-actor-access-bundle-constructor" />
@@ -133,7 +143,8 @@ Get names of modules
 
 ## ActorAccessModule Class
 
-
+Loaded module for an actor.
+This class provides pseudo interfaces for remote actor module
 
 
 <a name="sugo-caller-classes-actor-access-module-constructor" />

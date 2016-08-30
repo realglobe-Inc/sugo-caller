@@ -39,6 +39,5 @@ assets
 .*
 ci
 doc
-!doc/guides
 example
 test
