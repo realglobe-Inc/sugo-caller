@@ -5,8 +5,8 @@
   "main": "lib",
   "browser": "shim/browser",
   "scripts": {
-    "test": "./ci/test.js",
-    "prepublish": "./ci/assets.js && ./ci/build.js && ./ci/browser.js && ./ci/doc.js"
+    "test": "node ./ci/test.js",
+    "prepublish": "node ./ci/assets.js && node ./ci/build.js && node ./ci/browser.js && node ./ci/doc.js"
   },
   "repository": "realglobe-Inc/sugo-caller",
   "keywords": [
