@@ -78,7 +78,24 @@
       "access": "",
       "virtual": false,
       "description": "Authorize socket",
-      "parameters": [],
+      "parameters": [
+        {
+          "name": "socket",
+          "type": "Object",
+          "description": "Socket instance",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        },
+        {
+          "name": "auth",
+          "type": "Object",
+          "description": "Auth setting",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
       "examples": [],
       "returns": {
         "type": "Promise",

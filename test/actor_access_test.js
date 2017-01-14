@@ -55,6 +55,13 @@ describe('actor-access', () => {
     bash.emit('stdin', 'hoge')
     yield asleep(200)
 
+    try {
+      bundle.get('__invalid_module_name__')
+    } catch (e) {
+      assert.ok(e)
+      console.error(e)
+    }
+
     assert.ok(bash.subFoo)
     assert.ok(bash.subFoo.bar)
   }))
