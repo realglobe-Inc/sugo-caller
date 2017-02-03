@@ -1,12 +1,12 @@
 {
   "name": "sugo-caller",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Caller component of SUGOS.",
   "main": "lib",
   "browser": "shim/browser",
   "scripts": {
     "test": "node ./ci/test.js",
-    "prepare": "node ./ci/assets.js && node ./ci/build.js && node ./ci/browser.js && node ./ci/doc.js"
+    "prepare": "node ./ci/assets.js && node ./ci/build.js && node ./ci/shim.js && node ./ci/doc.js"
   },
   "repository": "realglobe-Inc/sugo-caller",
   "keywords": [

@@ -15,8 +15,11 @@ install:
 script:
 - ./ci/build.js
 - ./ci/doc.js
+- ./ci/shim.js
 - ./ci/test.js
 - ./ci/test_browser.js
 after_success:
 - ./ci/travis/publish.js
 - ./ci/travis/push_sugos.js
+env:
+  secure: "AO6w5JhrKT4mLkeBYWYXiieReITuufVkXcmHS77UP91zizon1Czvcwz+GEkMN/0D3EFpw57hb3ClAPOmpZvQYwe2BFyQLS/y1E0+Hi/J5nLW5D9sF9qtxE2flky0eZHVeB1MSsSpQnXy4eBIsGJvp1Ug+aGOIeWTlmLsnCbtnKTENKFdkyp9NOcRuSItHPCJ03v97H704wWyLFHsTLGZPAEgFln6sLubekA6H1eXcHXls4UkNCtZdz5D0b27n+/2T2JwV8iDYZAkZ9w2wIWuoNxeXFjcq49KTq4AX+WABNmRbe45s64a5hiU0yUeCOzHUT3qemA/WXD7splP7x9VeQRKrqPSmn5rjxZiemB3ogKbwicWue1YXAJ+32MsqGc2EFpWSFMJpSB3pl145y8RXEOAUUohWynFTVsjA5tF6kbv7IrJdmajh/lap+G/NAIJdYDES2MfKYw9w2EO1UeamUNCsAegLLT1iGTUp85McazLxJoVbWseW01bLduUzs9CnmSr0JSuRDDWHPDT0ZsfoG9g2te83RWaiKNf9lS1VSyQ3fdpdBY94P/qnmojgVq0Je4nMJgqkjwNKY/r0JssO0SEzB4bMy5oTROvaeHVvq0SKCZHgQ5hmcXaT2+dMugtdsPrJIKQZ88jEP/pX0Ki1xIXVS/erWHLifOEnaBvv4o="
