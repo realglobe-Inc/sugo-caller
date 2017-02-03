@@ -24,7 +24,7 @@ let port = 8888
 
 apeTasking.runTasks('browser test', [
   () => new Promise((resolve, reject) => {
-    exec('./ci/browser.js', (err, stdout) => {
+    exec('./ci/shim.js', (err, stdout) => {
       if (err) {
         reject(err)
       }
