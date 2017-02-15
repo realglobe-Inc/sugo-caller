@@ -8,6 +8,7 @@ Caller component of SUGOS.
   + [new SugoCaller(config)](#sugo-caller-classes-sugo-caller-constructor)
   + [caller.connect(key)](#sugo-caller-classes-sugo-caller-connect)
   + [caller.disconnect(key)](#sugo-caller-classes-sugo-caller-disconnect)
+  + [caller.urlFromConfig()](#sugo-caller-classes-sugo-caller-urlFromConfig)
 + [ActorAccessBundle](sugo-caller-classes) Class
   + [new ActorAccessBundle()](#sugo-caller-classes-actor-access-bundle-constructor)
   + [bundle.get(moduleName, options)](#sugo-caller-classes-actor-access-bundle-get)
@@ -84,6 +85,12 @@ Disconnect from cloud server
 | Param | Type | Description |
 | ----- | --- | -------- |
 | key | string | Key of actor to connect |
+
+
+<a class='md-heading-link' name="sugo-caller-classes-sugo-caller-urlFromConfig" ></a>
+
+### caller.urlFromConfig()
+
 
 
 <a class='md-heading-link' name="sugo-caller-classes"></a>

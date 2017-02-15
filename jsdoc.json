@@ -101,6 +101,27 @@
         "type": "Promise",
         "description": ""
       }
+    },
+    {
+      "name": "parseCallerUrl",
+      "access": "",
+      "virtual": false,
+      "description": "Parse caller URL",
+      "parameters": [
+        {
+          "name": null,
+          "type": "Object",
+          "description": "",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": [],
+      "returns": {
+        "type": "string",
+        "description": ""
+      }
     }
   ],
   "classes": [
@@ -200,6 +221,14 @@
             "type": "Promise",
             "description": ""
           }
+        },
+        {
+          "name": "urlFromConfig",
+          "access": "",
+          "virtual": false,
+          "description": "",
+          "parameters": [],
+          "examples": []
         }
       ]
     },
