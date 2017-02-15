@@ -16,6 +16,7 @@ apeTasking.runTasks('build', [
     '.*.bud',
     'doc/**/.*.bud',
     'lib/.*.bud',
+    'lib/**/.*.bud',
     'test/.*.bud'
   ])
 ], true)

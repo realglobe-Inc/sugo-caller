@@ -200,10 +200,10 @@ describe('sugo-caller', function () {
       let caught
       try {
         yield caller.connect('hoge')
+
       } catch (e) {
         caught = e
       }
-      // assert.ok(caught)
     }
     // Success
     {
@@ -213,30 +213,18 @@ describe('sugo-caller', function () {
       let actor01 = yield caller.connect('hoge')
       assert.ok(actor01)
     }
-
-    // // Without auth
-    // {
-    //   let caller = new SugoCaller(url, {})
-    //   let caught
-    //   try {
-    //     let actor01 = yield caller.connect('hoge')
-    //   } catch (e) {
-    //     caught = e
-    //   }
-    //   assert.ok(caught)
-    // }
   }))
 
   it('Format url', () => co(function * () {
     assert.equal(
-      SugoCaller.urlFromConfig({
+      SugoCaller.parseCallerUrl({
         protocol: 'https',
         host: 'example.com'
       }),
       'https://example.com/callers'
     )
     assert.equal(
-      SugoCaller.urlFromConfig({
+      SugoCaller.parseCallerUrl({
         protocol: 'http',
         hostname: 'example.com',
         port: 3000,
