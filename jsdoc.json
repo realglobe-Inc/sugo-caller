@@ -110,8 +110,11 @@
       "parameters": [
         {
           "name": null,
-          "type": "Object",
-          "description": "",
+          "type": [
+            "Object",
+            "string"
+          ],
+          "description": "URL string or config",
           "default": "",
           "optional": "",
           "nullable": ""
@@ -120,7 +123,7 @@
       "examples": [],
       "returns": {
         "type": "string",
-        "description": ""
+        "description": "- Parsed url"
       }
     }
   ],
@@ -242,7 +245,32 @@
       "constructor": {
         "name": "ActorAccess",
         "description": "Access for actors.",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "config",
+            "type": "Object",
+            "description": "Actor access configuration",
+            "default": "",
+            "optional": "",
+            "nullable": ""
+          },
+          {
+            "name": "config.specs",
+            "type": "Object",
+            "description": "Actor module specs",
+            "default": "",
+            "optional": "",
+            "nullable": ""
+          },
+          {
+            "name": "config.connector",
+            "type": "Object",
+            "description": "Hub server connector",
+            "default": "",
+            "optional": "",
+            "nullable": ""
+          }
+        ],
         "examples": []
       },
       "functions": [
@@ -300,7 +328,16 @@
       "constructor": {
         "name": "ActorAccessBundle",
         "description": "Bundle for actor access.\nThis class provides access for loaded modules on actor.",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "specs",
+            "type": "Object",
+            "description": "Actor module specs",
+            "default": "",
+            "optional": "",
+            "nullable": ""
+          }
+        ],
         "examples": []
       },
       "functions": [

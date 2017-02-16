@@ -10,7 +10,7 @@ Caller component of SUGOS.
   + [caller.disconnect(key)](#sugo-caller-classes-sugo-caller-disconnect)
   + [caller.urlFromConfig()](#sugo-caller-classes-sugo-caller-urlFromConfig)
 + [ActorAccessBundle](sugo-caller-classes) Class
-  + [new ActorAccessBundle()](#sugo-caller-classes-actor-access-bundle-constructor)
+  + [new ActorAccessBundle(specs)](#sugo-caller-classes-actor-access-bundle-constructor)
   + [bundle.get(moduleName, options)](#sugo-caller-classes-actor-access-bundle-get)
   + [bundle.has(moduleName)](#sugo-caller-classes-actor-access-bundle-has)
   + [bundle.set(moduleName, module, options)](#sugo-caller-classes-actor-access-bundle-set)
@@ -103,10 +103,13 @@ This class provides access for loaded modules on actor.
 
 <a class='md-heading-link' name="sugo-caller-classes-actor-access-bundle-constructor" ></a>
 
-### new ActorAccessBundle()
+### new ActorAccessBundle(specs)
 
 Constructor of ActorAccessBundle class
 
+| Param | Type | Description |
+| ----- | --- | -------- |
+| specs | Object | Actor module specs |
 
 
 <a class='md-heading-link' name="sugo-caller-classes-actor-access-bundle-get" ></a>
