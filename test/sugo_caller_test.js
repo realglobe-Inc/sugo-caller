@@ -94,6 +94,7 @@ describe('sugo-caller', function () {
     let caller = new SugoCaller(url, {
       multiplex: true
     })
+    assert.ok(caller.clientType)
     let actor01 = yield caller.connect('hoge')
 
     assert.ok(actor01.has('bash'))
