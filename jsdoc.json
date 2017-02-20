@@ -102,13 +102,15 @@
     {
       "name": "SugoCaller",
       "description": "",
-      "extends": [],
+      "extends": [
+        "SugoClient"
+      ],
       "access": "",
       "virtual": false,
       "fires": "",
       "constructor": {
         "name": "SugoCaller",
-        "description": "Hub client for caller side.\nWhen you connect to remote actor with a caller, it receives specification of the actor and dynamically define function kick actor side function.\nThis way you can magically call functions declared on remote as if they were here.",
+        "description": "Hub client for caller side.\nWhen you connect to remote actor with a caller, it receives specification of the actor and dynamically define function to kick actor side function.\nWith this way you can magically call functions declared on remote as if they were here.",
         "parameters": [
           {
             "name": "config",
@@ -203,6 +205,15 @@
           "description": "",
           "parameters": [],
           "examples": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "clientType",
+          "access": "",
+          "virtual": false,
+          "description": "",
+          "type": ""
         }
       ]
     },

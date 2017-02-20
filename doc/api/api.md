@@ -1,4 +1,4 @@
-# sugo-caller@3.2.4
+# sugo-caller@3.2.5
 
 Caller component of SUGOS.
 
@@ -46,8 +46,8 @@ co(function * () {
 ## SugoCaller Class
 
 Hub client for caller side.
-When you connect to remote actor with a caller, it receives specification of the actor and dynamically define function kick actor side function.
-This way you can magically call functions declared on remote as if they were here.
+When you connect to remote actor with a caller, it receives specification of the actor and dynamically define function to kick actor side function.
+With this way you can magically call functions declared on remote as if they were here.
 
 
 <a class='md-heading-link' name="sugo-caller-classes-sugo-caller-constructor" ></a>
