@@ -47,6 +47,8 @@ module.exports = function (config) {
 
     colors: true,
 
-    logLevel: config.LOG_INFO
+    logLevel: config.LOG_INFO,
+
+    browserNoActivityTimeout: 30000
   })
 }
