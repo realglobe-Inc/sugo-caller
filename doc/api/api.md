@@ -1,22 +1,22 @@
-# sugo-caller@3.2.5
+# sugo-caller@3.2.6
 
 Caller component of SUGOS.
 
 + Functions
   + [sugoCaller(config)](#sugo-caller-function-sugo-caller)
-+ [SugoCaller](sugo-caller-classes) Class
++ [`SugoCaller`](#sugo-caller-classes) Class
   + [new SugoCaller(config)](#sugo-caller-classes-sugo-caller-constructor)
   + [caller.connect(key)](#sugo-caller-classes-sugo-caller-connect)
   + [caller.disconnect(key)](#sugo-caller-classes-sugo-caller-disconnect)
   + [caller.urlFromConfig()](#sugo-caller-classes-sugo-caller-urlFromConfig)
-+ [ActorAccessBundle](sugo-caller-classes) Class
++ [`ActorAccessBundle`](#sugo-caller-classes) Class
   + [new ActorAccessBundle(specs)](#sugo-caller-classes-actor-access-bundle-constructor)
   + [bundle.get(moduleName, options)](#sugo-caller-classes-actor-access-bundle-get)
   + [bundle.has(moduleName)](#sugo-caller-classes-actor-access-bundle-has)
   + [bundle.set(moduleName, module, options)](#sugo-caller-classes-actor-access-bundle-set)
   + [bundle.del(moduleName)](#sugo-caller-classes-actor-access-bundle-del)
   + [bundle.names()](#sugo-caller-classes-actor-access-bundle-names)
-+ [ActorAccessModule](sugo-caller-classes) Class
++ [`ActorAccessModule`](#sugo-caller-classes) Class
   + [new ActorAccessModule(methods, connection)](#sugo-caller-classes-actor-access-module-constructor)
 
 ## Functions
@@ -43,11 +43,16 @@ co(function * () {
 
 <a class='md-heading-link' name="sugo-caller-classes"></a>
 
-## SugoCaller Class
+## `SugoCaller` Class
 
 Hub client for caller side.
 When you connect to remote actor with a caller, it receives specification of the actor and dynamically define function to kick actor side function.
 With this way you can magically call functions declared on remote as if they were here.
+
+**Extends**: 
+
++ `SugoClient`
+
 
 
 <a class='md-heading-link' name="sugo-caller-classes-sugo-caller-constructor" ></a>
@@ -95,10 +100,12 @@ Disconnect from cloud server
 
 <a class='md-heading-link' name="sugo-caller-classes"></a>
 
-## ActorAccessBundle Class
+## `ActorAccessBundle` Class
 
 Bundle for actor access.
 This class provides access for loaded modules on actor.
+
+
 
 
 <a class='md-heading-link' name="sugo-caller-classes-actor-access-bundle-constructor" ></a>
@@ -167,10 +174,12 @@ Get names of modules
 
 <a class='md-heading-link' name="sugo-caller-classes"></a>
 
-## ActorAccessModule Class
+## `ActorAccessModule` Class
 
 Loaded module for an actor.
 This class provides pseudo interfaces for remote actor module
+
+
 
 
 <a class='md-heading-link' name="sugo-caller-classes-actor-access-module-constructor" ></a>
