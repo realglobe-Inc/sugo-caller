@@ -31,6 +31,10 @@ describe('sugo-caller', function () {
       sockets[ socket.id ] = socket
       socket
         .on(JOIN, (data, callback) => {
+          if (data.messages) {
+            console.log('JOIN messages', data.messages)
+          }
+          // console.log(data.messages)
           callback({
             status: OK,
             payload: {
@@ -95,7 +99,7 @@ describe('sugo-caller', function () {
       multiplex: true
     })
     assert.ok(caller.clientType)
-    let actor01 = yield caller.connect('hoge')
+    let actor01 = yield caller.connect('hoge', { messages: { 'foo': 'bar' } })
 
     assert.ok(actor01.has('bash'))
     let bash = actor01.get('bash')

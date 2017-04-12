@@ -177,6 +177,22 @@
               "default": "",
               "optional": "",
               "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            },
+            {
+              "name": "options.messages",
+              "type": "Object",
+              "description": "Connect messages",
+              "default": null,
+              "optional": true,
+              "nullable": ""
             }
           ],
           "examples": [],
@@ -197,6 +213,22 @@
               "description": "Key of actor to connect",
               "default": "",
               "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            },
+            {
+              "name": "options.messages",
+              "type": "Object",
+              "description": "Disconnect messages",
+              "default": null,
+              "optional": true,
               "nullable": ""
             }
           ],
