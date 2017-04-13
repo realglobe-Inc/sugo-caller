@@ -5,7 +5,7 @@
 'use strict'
 
 const SugoCaller = require('../lib/sugo_caller.js')
-const assert = require('assert')
+const { ok, equal, deepEqual } = require('assert')
 const sgSocket = require('sg-socket')
 const asleep = require('asleep')
 const aport = require('aport')
@@ -98,17 +98,17 @@ describe('sugo-caller', function () {
     let caller = new SugoCaller(url, {
       multiplex: true
     })
-    assert.ok(caller.clientType)
+    ok(caller.clientType)
     let actor01 = yield caller.connect('hoge', { messages: { 'foo': 'bar' } })
 
-    assert.ok(actor01.has('bash'))
+    ok(actor01.has('bash'))
     let bash = actor01.get('bash')
     yield bash.spawn('ls', [ '-la' ])
     let print = (data) => console.log(data)
     bash.on('stdout', print)
     yield new Promise((resolve, reject) => {
       bash.on('stdout', (data) => {
-        assert.deepEqual(data, {
+        deepEqual(data, {
           'hoge': 'hogehoge'
         })
         resolve()
@@ -124,7 +124,7 @@ describe('sugo-caller', function () {
         })
       }
     })
-    assert.deepEqual(bash.eventNames(), [ 'stdout' ])
+    deepEqual(bash.eventNames(), [ 'stdout' ])
     bash.off('stdout', print)
     bash.emit('stdin', { foo: 'bar' })
 
@@ -136,8 +136,8 @@ describe('sugo-caller', function () {
     // Describe module
     {
       let description = actor01.describe('bash')
-      assert.equal(description.name, 'bash')
-      assert.equal(description.desc, 'Bash module')
+      equal(description.name, 'bash')
+      equal(description.desc, 'Bash module')
     }
     // Try call after disconnected
     {
@@ -147,7 +147,7 @@ describe('sugo-caller', function () {
       } catch (err) {
         caught = err
       }
-      assert.ok(caught)
+      ok(caught)
     }
     // Validate the connecting module
     {
@@ -166,7 +166,7 @@ describe('sugo-caller', function () {
       } catch (err) {
         caught = err
       }
-      assert.ok(caught)
+      ok(caught)
     }
   }))
 
@@ -195,7 +195,7 @@ describe('sugo-caller', function () {
         auth: { token: 'mytoken' }
       })
       let actor01 = yield caller.connect('hoge')
-      assert.ok(actor01.has('bash'))
+      ok(actor01.has('bash'))
     }
     // Failed
     {
@@ -216,19 +216,19 @@ describe('sugo-caller', function () {
         auth: { token: 'mytoken' }
       })
       let actor01 = yield caller.connect('hoge')
-      assert.ok(actor01)
+      ok(actor01)
     }
   }))
 
   it('Format url', () => co(function * () {
-    assert.equal(
+    equal(
       SugoCaller.parseCallerUrl({
         protocol: 'https',
         host: 'example.com'
       }),
       'https://example.com/callers'
     )
-    assert.equal(
+    equal(
       SugoCaller.parseCallerUrl({
         protocol: 'http',
         hostname: 'example.com',
@@ -265,15 +265,19 @@ describe('sugo-caller', function () {
     yield actor.connect()
     let caller = new SugoCaller({ port })
     let actor01 = yield caller.connect('actor01')
-    assert.ok(actor01)
+    ok(actor01)
+    equal(actor01.key, 'actor01')
+    // TODO after this PR accepted:
+    //  https://github.com/realglobe-Inc/sugo-hub/pull/38
+    // ok(actor01.as)
     let description = actor01.describe('foo')
-    assert.ok(description)
+    ok(description)
     let foo = actor01.get('foo')
     let hi = yield foo.sayHi('Bess', new Date())
-    assert.equal(hi, 'Hi!, Bess')
+    equal(hi, 'Hi!, Bess')
 
     let date = yield foo.handleDate(new Date())
-    assert.ok(date)
+    ok(date)
     yield foo.handleFunc(() => 'year!')
 
     yield actor01.disconnect()
