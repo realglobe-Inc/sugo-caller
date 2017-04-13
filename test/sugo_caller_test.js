@@ -13,7 +13,7 @@ const co = require('co')
 const sugoHub = require('sugo-hub')
 const sugoActor = require('sugo-actor')
 const socketIOAuth = require('socketio-auth')
-
+const { CallerEvents } = require('sugo-constants')
 const { RemoteEvents, AcknowledgeStatus } = require('sg-socket-constants')
 
 const { OK, NG } = AcknowledgeStatus
@@ -242,7 +242,9 @@ describe('sugo-caller', function () {
   it('Connect to actual SUGO-Hub', () => co(function * () {
     const { Module } = sugoActor
     let port = yield aport()
-    let hub = yield sugoHub({}).listen(port)
+    let hub = yield sugoHub({
+      storage: `${__dirname}/var/sugos/testing-03`
+    }).listen(port)
     let actor = sugoActor({
       port,
       key: 'actor01',
@@ -284,6 +286,43 @@ describe('sugo-caller', function () {
     yield asleep(10)
     yield actor.disconnect()
     yield hub.close()
+  }))
+
+  it('Actor level event emitting', () => co(function * () {
+    const { Module } = sugoActor
+    let port = yield aport()
+    let hub = yield sugoHub({
+      storage: `${__dirname}/var/sugos/testing-05`
+    }).listen(port)
+    let actor = sugoActor({
+      port,
+      key: 'actor01',
+      modules: {
+        foo: new Module({})
+      }
+    })
+    let received
+    actor.on(CallerEvents.JOIN, ({ caller, messages }) => {
+      let { token } = messages
+      setTimeout(() => {
+        caller.emit('token:received', { token })
+      }, 10)
+    })
+    yield actor.connect()
+    yield asleep(100)
+    let caller = new SugoCaller({ port })
+    let actor01 = yield caller.connect('actor01', {
+      messages: { token: '1234qwer' }
+    })
+    actor01.on('token:received', (data) => {
+      received = data
+    })
+    yield asleep(300)
+    yield actor01.disconnect()
+    yield actor.disconnect()
+    yield hub.close()
+    ok(received)
+    equal(received.token, '1234qwer')
   }))
 })
 
