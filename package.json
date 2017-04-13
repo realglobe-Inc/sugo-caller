@@ -36,7 +36,7 @@
     "sg-validator": "^1.1.1",
     "sugo-client": "^1.1.1",
     "sugo-client-auth": "^1.0.1",
-    "sugo-constants": "^2.2.1"
+    "sugo-constants": "^2.3.2"
   },
   "devDependencies": {
     "ababel": "^2.0.1",
@@ -59,8 +59,8 @@
     "sg-templates": "^1.4.4",
     "socketio-auth": "^0.1.0",
     "stringcase": "^3.0.1",
-    "sugo-actor": "^4.6.4",
-    "sugo-hub": "^5.3.3",
+    "sugo-actor": "^4.7.4",
+    "sugo-hub": "^5.4.3",
     "sugos-assets": "^2.0.6",
     "sugos-travis": "^2.0.7",
     "writeout": "^2.0.7"
