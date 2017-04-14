@@ -9,6 +9,7 @@ const { ok, equal, deepEqual } = require('assert')
 const sgSocket = require('sg-socket')
 const asleep = require('asleep')
 const aport = require('aport')
+const uuid = require('uuid')
 const co = require('co')
 const sugoHub = require('sugo-hub')
 const sugoActor = require('sugo-actor')
@@ -17,7 +18,7 @@ const { CallerEvents } = require('sugo-constants')
 const { RemoteEvents, AcknowledgeStatus } = require('sg-socket-constants')
 
 const { OK, NG } = AcknowledgeStatus
-const { PERFORM, PIPE, JOIN, LEAVE } = RemoteEvents
+const { PERFORM, PIPE, JOIN, LEAVE, RESULT } = RemoteEvents
 
 describe('sugo-caller', function () {
   this.timeout(16000)
@@ -66,9 +67,20 @@ describe('sugo-caller', function () {
           })
         })
         .on(PERFORM, (data, callback) => {
+          let pid = uuid.v4()
           callback({
-            status: OK
+            status: OK,
+            payload: {
+              pid
+            }
           })
+          setTimeout(() => {
+            socket.emit(RESULT, {
+              status: OK,
+              pid,
+              payload: {}
+            })
+          }, 10)
         })
       socket.on(LEAVE, (data, callback) => {
         callback({ status: OK })
