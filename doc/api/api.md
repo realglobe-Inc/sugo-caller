@@ -1,4 +1,4 @@
-# sugo-caller@3.4.2
+# sugo-caller@4.0.0
 
 Caller component of SUGOS.
 
