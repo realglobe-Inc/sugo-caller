@@ -6,7 +6,8 @@
   "browser": "shim/browser",
   "scripts": {
     "test": "node ./ci/test.js",
-    "prepare": "node ./ci/assets.js && node ./ci/build.js && node ./ci/shim.js && node ./ci/doc.js"
+    "prepare": "node ./ci/assets.js && node ./ci/build.js && node ./ci/shim.js && node ./ci/doc.js",
+    "browser:test": "node ./ci/test_browser.js"
   },
   "repository": "realglobe-Inc/sugo-caller",
   "keywords": [
