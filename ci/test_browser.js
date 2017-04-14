@@ -11,13 +11,14 @@ process.env.DEBUG = 'sg:*'
 
 const apeTasking = require('ape-tasking')
 const co = require('co')
+const uuid = require('uuid')
 const sgSocket = require('sg-socket')
-const {exec} = require('child_process')
+const { exec } = require('child_process')
 
 const { RemoteEvents, AcknowledgeStatus } = require('sg-socket-constants')
 
 const { OK, NG } = AcknowledgeStatus
-const { PERFORM, PIPE, JOIN, LEAVE } = RemoteEvents
+const { PERFORM, PIPE, JOIN, LEAVE, RESULT } = RemoteEvents
 
 let server
 let port = 8888
@@ -62,9 +63,20 @@ apeTasking.runTasks('browser test', [
           })
         })
         .on(PERFORM, (data, callback) => {
+          let pid = uuid.v4()
           callback({
-            status: OK
+            status: OK,
+            payload: {
+              pid
+            }
           })
+          setTimeout(() => {
+            socket.emit(RESULT, {
+              status: OK,
+              pid,
+              payload: {}
+            })
+          }, 10)
         })
       socket.on(LEAVE, (data, callback) => {
         callback({ status: OK })

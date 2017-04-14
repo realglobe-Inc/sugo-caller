@@ -20,7 +20,7 @@ describe('sugo-caller', function () {
 
   }))
 
-  it('Sugo caller', () => co(function * () {
+  it('Sugo Caller', () => co(function * () {
     let url = `http://localhost:${port}/callers`
 
     let caller = new SugoCaller(url, {})
