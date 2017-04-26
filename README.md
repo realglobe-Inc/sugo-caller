@@ -135,24 +135,23 @@ Create a caller instance with [SUGO-Hub][sugo_hub_url] url and connect to an [SU
  */
 'use strict'
 
-const co = require('co')
 const sugoCaller = require('sugo-caller')
 
 const TARGET_ACTOR_ID = 'my-actor-01'
 
-co(function * () {
+async function tryExample () {
   let caller = sugoCaller({
     protocol: 'https',
     hostname: 'my-sugo-hub.example.com'
   })
 
 // Connect to the target actor
-  let actor = yield caller.connect(TARGET_ACTOR_ID)
+  let actor = await caller.connect(TARGET_ACTOR_ID)
   let shell = actor.get('shell') // Get bash interface
 
   // Trigger ls command on remote actor
   {
-    let lsResult = yield shell.exec('ls -la /opt/shared')
+    let lsResult = await shell.exec('ls -la /opt/shared')
     console.log(lsResult)
   }
 
@@ -160,14 +159,16 @@ co(function * () {
   {
     let out = (chunk) => process.stdout.write(chunk)
     shell.on('stdout', out)
-    yield shell.spawn('tail -f /var/log/app.log') // Trigger tailing without blocking
-    yield new Promise((resolve) => setTimeout(() => resolve(), 3000)) // Block for duration
+    await shell.spawn('tail -f /var/log/app.log') // Trigger tailing without blocking
+    await new Promise((resolve) => setTimeout(() => resolve(), 3000)) // Block for duration
     shell.off('stdout', out)
   }
 
   // Exec reboot command
-  yield shell.exec('reboot')
-}).catch((err) => console.error(err))
+  await shell.exec('reboot')
+}
+
+tryExample().catch((err) => console.error(err))
 
 
 ```
@@ -198,7 +199,6 @@ If the modules does not conform to the schema, it throws an error.
  */
 'use strict'
 
-const co = require('co')
 const sugoCaller = require('sugo-caller')
 
 // JSON-Schema for expected spec info
@@ -211,9 +211,9 @@ const shellSchemaV2 = {
   }
 }
 
-co(function * () {
+async function tryRestrictExample () {
   let caller = sugoCaller({ /* ... */ })
-  let actor = yield caller.connect('my-actor-01')
+  let actor = await caller.connect('my-actor-01')
 
   let shell
   try {
@@ -225,7 +225,9 @@ co(function * () {
     console.error('Failed to access!!')
   }
   /* ... */
-}).catch((err) => console.error(err))
+}
+
+tryRestrictExample().catch((err) => console.error(err))
 
 
 ```
@@ -243,12 +245,11 @@ You can get module spec data via `.describe(moduleName)` of actor connection.
  */
 'use strict'
 
-const co = require('co')
 const sugoCaller = require('sugo-caller')
 
-co(function * () {
+async function tryDescribeExample () {
   let caller = sugoCaller({ /* ... */ })
-  let actor = yield caller.connect('my-actor-01')
+  let actor = await caller.connect('my-actor-01')
 
   {
     let description = actor.describe('shell')
@@ -256,7 +257,9 @@ co(function * () {
   }
 
   /* ... */
-}).catch((err) => console.error(err))
+}
+
+tryDescribeExample().catch((err) => console.error(err))
 
 
 ```
@@ -274,10 +277,9 @@ You can pass auth config to SUGO-Hub by setting `auth` field on the constructor.
  */
 'use strict'
 
-const co = require('co')
 const sugoCaller = require('sugo-caller')
 
-co(function * () {
+async function tryAutyExample () {
   let caller = sugoCaller({
     protocol: 'https',
     hostname: 'my-sugo-hub.example.com',
@@ -289,10 +291,12 @@ co(function * () {
   })
 
 // Connect to the target actor
-  let actor = yield caller.connect('my-actor-01')
+  let actor = await caller.connect('my-actor-01')
   let shell = actor.get('shell') // Get bash interface
   /* ... */
-}).catch((err) => console.error(err))
+}
+
+tryAutyExample().catch((err) => console.error(err))
 
 
 ```

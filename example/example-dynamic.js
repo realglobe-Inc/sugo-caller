@@ -5,12 +5,11 @@
  */
 'use strict'
 
-const co = require('co')
 const sugoCaller = require('sugo-caller')
 
-co(function * () {
+async function tryDynamicExample () {
   let caller = sugoCaller({ /* ... */ })
-  let actor = yield caller.connect('my-actor-01')
+  let actor = await caller.connect('my-actor-01')
 
   {
     let location = actor.get('location')
@@ -20,14 +19,16 @@ co(function * () {
 
     // To wait for async done, you need call internal function directly since there is no way to wait promise with dynamic setter.
     // Dynamic sett has prefix "set$"
-    yield location.set$href('http://example.com')
+    await location.set$href('http://example.com')
 
     // Use dynamic setter
-    let href = yield location.href
+    let href = await location.href
     // Equals
-    href = yield location.get$href()
+    href = await location.get$href()
   }
 
   /* ... */
-}).catch((err) => console.error(err))
+}
+
+tryDynamicExample().catch((err) => console.error(err))
 
