@@ -5,12 +5,11 @@
  */
 'use strict'
 
-const co = require('co')
 const sugoCaller = require('sugo-caller')
 
-co(function * () {
+async function tryDescribeExample () {
   let caller = sugoCaller({ /* ... */ })
-  let actor = yield caller.connect('my-actor-01')
+  let actor = await caller.connect('my-actor-01')
 
   {
     let description = actor.describe('shell')
@@ -18,5 +17,7 @@ co(function * () {
   }
 
   /* ... */
-}).catch((err) => console.error(err))
+}
+
+tryDescribeExample().catch((err) => console.error(err))
 

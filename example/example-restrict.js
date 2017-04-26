@@ -5,7 +5,6 @@
  */
 'use strict'
 
-const co = require('co')
 const sugoCaller = require('sugo-caller')
 
 // JSON-Schema for expected spec info
@@ -18,9 +17,9 @@ const shellSchemaV2 = {
   }
 }
 
-co(function * () {
+async function tryRestrictExample () {
   let caller = sugoCaller({ /* ... */ })
-  let actor = yield caller.connect('my-actor-01')
+  let actor = await caller.connect('my-actor-01')
 
   let shell
   try {
@@ -32,5 +31,7 @@ co(function * () {
     console.error('Failed to access!!')
   }
   /* ... */
-}).catch((err) => console.error(err))
+}
+
+tryRestrictExample().catch((err) => console.error(err))
 

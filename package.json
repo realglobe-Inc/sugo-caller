@@ -33,11 +33,11 @@
     "sg-schemas": "^2.2.2",
     "sg-serializer": "^1.1.9",
     "sg-socket-client": "^1.5.0",
-    "sg-socket-constants": "^1.5.1",
+    "sg-socket-constants": "^1.6.2",
     "sg-validator": "^1.1.1",
     "sugo-client": "^1.1.1",
     "sugo-client-auth": "^1.0.1",
-    "sugo-constants": "^2.3.3"
+    "sugo-constants": "^2.4.2"
   },
   "devDependencies": {
     "ababel": "^2.0.1",
@@ -61,8 +61,8 @@
     "sg-templates": "^1.4.4",
     "socketio-auth": "^0.1.0",
     "stringcase": "^3.0.1",
-    "sugo-actor": "realglobe-Inc/sugo-actor",
-    "sugo-hub": "realglobe-Inc/sugo-hub",
+    "sugo-actor": "^5.0.1",
+    "sugo-hub": "^6.0.5",
     "sugos-assets": "^2.0.6",
     "sugos-travis": "^2.0.7",
     "writeout": "^2.0.7"

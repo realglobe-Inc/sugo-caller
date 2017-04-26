@@ -6,10 +6,9 @@
  */
 'use strict'
 
-const co = require('co')
 const sugoCaller = require('sugo-caller')
 
-co(function * () {
+async function tryAutyExample () {
   let caller = sugoCaller({
     protocol: 'https',
     hostname: 'my-sugo-hub.example.com',
@@ -21,8 +20,10 @@ co(function * () {
   })
 
 // Connect to the target actor
-  let actor = yield caller.connect('my-actor-01')
+  let actor = await caller.connect('my-actor-01')
   let shell = actor.get('shell') // Get bash interface
   /* ... */
-}).catch((err) => console.error(err))
+}
+
+tryAutyExample().catch((err) => console.error(err))
 
