@@ -47,7 +47,7 @@
     "ape-releasing": "^4.0.4",
     "ape-tasking": "^4.0.8",
     "ape-tmpl": "^5.0.15",
-    "ape-updating": "^4.1.0",
+    "ape-updating": "^4.1.1",
     "aport": "^1.0.0",
     "asleep": "^1.0.3",
     "coz": "^6.0.17",
@@ -61,11 +61,11 @@
     "sg-templates": "^1.4.4",
     "socketio-auth": "^0.1.0",
     "stringcase": "^3.0.1",
-    "sugo-actor": "^5.0.1",
-    "sugo-hub": "^6.0.5",
+    "sugo-actor": "^5.0.2",
+    "sugo-hub": "^6.0.8",
     "sugos-assets": "^2.0.6",
     "sugos-travis": "^2.0.7",
-    "writeout": "^2.0.7"
+    "writeout": "^2.2.0"
   },
   "engines": {
     "node": ">=6",
