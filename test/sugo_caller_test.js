@@ -272,6 +272,11 @@ describe('sugo-caller', function () {
           },
           handleFunc () {
 
+          },
+          doWrong(){
+            let err = new Error('something is wrong')
+            Object.assign(err, { name: 'SOMETHING_IS_WRONG' })
+            throw err
           }
         })
       }
@@ -293,6 +298,11 @@ describe('sugo-caller', function () {
     let date = yield foo.handleDate(new Date())
     ok(date)
     yield foo.handleFunc(() => 'year!')
+
+    {
+      let caught = yield foo.doWrong().catch((e) => e)
+      equal(caught.name, 'SOMETHING_IS_WRONG')
+    }
 
     yield actor01.disconnect()
     yield asleep(10)
