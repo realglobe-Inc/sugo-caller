@@ -309,10 +309,10 @@ describe('sugo-caller', function () {
     }
 
     // Handling array
-    // {
-    //   let a = yield foo.returnsArray()
-    //   ok(a[ 0 ].d instanceof Date)
-    // }
+    {
+      let a = yield foo.returnsArray()
+      ok(a[ 0 ].d instanceof Date)
+    }
 
     yield actor01.disconnect()
     yield asleep(10)

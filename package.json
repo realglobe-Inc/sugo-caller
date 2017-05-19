@@ -52,7 +52,7 @@
     "asleep": "^1.0.3",
     "coz": "^6.0.17",
     "filecopy": "^3.0.1",
-    "filedel": "^2.0.4",
+    "filedel": "^3.0.0",
     "injectmock": "^2.0.0",
     "markdown-toc": "^1.1.0",
     "request": "^2.81.0",
