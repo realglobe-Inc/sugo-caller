@@ -11,7 +11,7 @@ module.exports = function (config) {
     ],
 
     preprocessors: {
-      'test/test_index.karma.js': [ 'webpack', 'sourcemap' ]
+      'test/test_index.karma.js': ['webpack', 'sourcemap']
     },
 
     reporters: ['mocha'],
@@ -25,7 +25,7 @@ module.exports = function (config) {
             loader: 'babel-loader',
             include: __dirname + '/test',
             query: {
-              presets: [ 'es2015' ]
+              presets: ['es2015', 'es2016', 'es2017']
             }
           },
           {
