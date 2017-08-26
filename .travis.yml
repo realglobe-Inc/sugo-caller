@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '6'
+- '8'
 addons:
   firefox: "43.0"
 before_install:

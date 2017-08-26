@@ -6,20 +6,20 @@
 
 const create = require('../lib/create.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('create', () => {
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Create', () => co(function * () {
+  it('Create', async () => {
     assert.ok(create('http://example.com'))
-  }))
+  })
 })
 
 /* global describe, before, after, it */

@@ -9,27 +9,18 @@
 process.chdir(`${__dirname}/..`)
 
 const apeTasking = require('ape-tasking')
-const co = require('co')
 const coz = require('coz')
-const { execSync } = require('child_process')
-const writeout = require('writeout')
+const jsdoc = require('the-script-jsdoc')
 
-apeTasking.runTasks('build', [
+apeTasking.runTasks('doc', [
   // Generate jsdoc.json
-  () => co(function * () {
-    let src = 'lib/*.js lib/**/*.js'
+  async () => {
+    const src = [
+      'lib/*.js',
+      'lib/**/*.js'
+    ]
     let dest = 'jsdoc.json'
-    let data = execSync(`
-    jsdoc ${src} -t templates/haruki -d console -q format=JSON
-`)
-    data = JSON.stringify(JSON.parse(data), null, 2)
-    let result = yield writeout(dest, data, {
-      mkdirp: true,
-      skipIfIdentical: true
-    })
-    if (!result.skipped) {
-      console.log(`File generated: ${result.filename}`)
-    }
-  }),
+    await jsdoc(src, dest)
+  },
   () => coz.render('doc/**/.*.bud')
 ], true)

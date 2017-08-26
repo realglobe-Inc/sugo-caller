@@ -7,18 +7,18 @@
 const ActorAccess = require('../shim/browser/accessing/actor_access.js')
 const assert = require('assert')
 const asleep = require('asleep')
-const co = require('co')
+
 
 describe('actor-access', () => {
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Actor access', () => co(function * () {
+  it('Actor access', async () => {
     let access = new ActorAccess({
       specs: {
         bash: {
@@ -44,10 +44,10 @@ describe('actor-access', () => {
     assert.ok(access)
     let { bundle } = access
     let bash = bundle.get('bash')
-    yield bash.spawn('ls', [ '-la' ])
+    await bash.spawn('ls', [ '-la' ])
     bash.emit('stdin', 'hoge')
-    yield asleep(200)
-  }))
+    await asleep(200)
+  })
 })
 
 /* global describe, before, after, it */

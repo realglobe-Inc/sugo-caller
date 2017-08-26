@@ -6,20 +6,20 @@
 
 const parseCallerUrl = require('../lib/parsing/parse_caller_url.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('parse-caller-url', function () {
   this.timeout(3000)
 
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Parse caller url', () => co(function * () {
+  it('Parse caller url', async () => {
     assert.equal(
       parseCallerUrl('http://localhost:3000/callers'),
       'http://localhost:3000/callers'
@@ -38,7 +38,7 @@ describe('parse-caller-url', function () {
       'http://example.com:3001/callers'
     )
 
-  }))
+  })
 })
 
 /* global describe, before, after, it */

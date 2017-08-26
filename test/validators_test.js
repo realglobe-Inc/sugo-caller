@@ -6,22 +6,22 @@
 
 const validators = require('../lib/validators.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('validators', function () {
   this.timeout(3000)
 
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Validators', () => co(function * () {
+  it('Validators', async () => {
     assert.ok(validators)
-  }))
+  })
 })
 
 /* global describe, before, after, it */

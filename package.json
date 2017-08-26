@@ -1,6 +1,6 @@
 {
   "name": "sugo-caller",
-  "version": "5.0.5",
+  "version": "6.0.0",
   "description": "Caller component of SUGOS.",
   "main": "lib",
   "browser": "shim/browser",
@@ -28,7 +28,6 @@
   "dependencies": {
     "argx": "^3.0.1",
     "bwindow": "^1.0.7",
-    "co": "^4.6.0",
     "sg-queue": "^1.1.4",
     "sg-schemas": "^2.2.2",
     "sg-serializer": "^1.1.10",
@@ -46,10 +45,12 @@
     "ape-formatting": "^1.0.0",
     "ape-releasing": "^4.0.4",
     "ape-tasking": "^4.0.8",
-    "ape-tmpl": "^5.0.15",
+    "ape-tmpl": "^6.0.0",
     "ape-updating": "^4.1.1",
     "aport": "^1.0.0",
     "asleep": "^1.0.3",
+    "babel-preset-es2016": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
     "coz": "^6.0.17",
     "filecopy": "^3.0.1",
     "filedel": "^3.0.0",
@@ -60,15 +61,16 @@
     "sg-socket": "^2.0.1",
     "sg-templates": "^1.4.4",
     "socketio-auth": "^0.1.0",
-    "stringcase": "^3.0.1",
-    "sugo-actor": "github:realglobe-inc/sugo-actor",
-    "sugo-hub": "github:realglobe-inc/sugo-hub",
+    "stringcase": "^4.0.0",
+    "sugo-actor": "*",
+    "sugo-hub": "*",
     "sugos-assets": "^2.0.6",
     "sugos-travis": "^2.0.7",
+    "the-script-jsdoc": "^1.0.8",
     "writeout": "^2.2.0"
   },
   "engines": {
-    "node": ">=6",
+    "node": ">=7.6",
     "npm": ">=4"
   }
 }

@@ -10,7 +10,7 @@ const sgSocket = require('sg-socket')
 const asleep = require('asleep')
 const aport = require('aport')
 const uuid = require('uuid')
-const co = require('co')
+
 const sugoHub = require('sugo-hub')
 const sugoActor = require('sugo-actor')
 const socketIOAuth = require('socketio-auth')
@@ -25,8 +25,8 @@ describe('sugo-caller', function () {
 
   let port, server
   let sockets = {}
-  before(() => co(function * () {
-    port = yield aport()
+  before(async () => {
+    port = await aport()
     server = sgSocket(port)
     let handle = (socket) => {
       sockets[ socket.id ] = socket
@@ -97,28 +97,28 @@ describe('sugo-caller', function () {
       }
     })
     callerAuthIO.on('connection', handle)
-  }))
+  })
 
-  after(() => co(function * () {
-    yield asleep(200)
+  after(async () => {
+    await asleep(200)
     server.close()
-  }))
+  })
 
-  it('Sugo caller', () => co(function * () {
+  it('Sugo caller', async () => {
     let url = `http://localhost:${port}/callers`
 
     let caller = new SugoCaller(url, {
       multiplex: true
     })
     ok(caller.clientType)
-    let actor01 = yield caller.connect('hoge', { messages: { 'foo': 'bar' } })
+    let actor01 = await caller.connect('hoge', { messages: { 'foo': 'bar' } })
 
     ok(actor01.has('bash'))
     let bash = actor01.get('bash')
-    yield bash.spawn('ls', [ '-la' ])
+    await bash.spawn('ls', [ '-la' ])
     let print = (data) => console.log(data)
     bash.on('stdout', print)
-    yield new Promise((resolve, reject) => {
+    await new Promise((resolve, reject) => {
       bash.on('stdout', (data) => {
         deepEqual(data, {
           'hoge': 'hogehoge'
@@ -140,11 +140,11 @@ describe('sugo-caller', function () {
     bash.off('stdout', print)
     bash.emit('stdin', { foo: 'bar' })
 
-    yield bash() // Call default
+    await bash() // Call default
 
-    yield asleep(20)
+    await asleep(20)
 
-    yield caller.disconnect('hoge')
+    await caller.disconnect('hoge')
     // Describe module
     {
       let description = actor01.describe('bash')
@@ -155,7 +155,7 @@ describe('sugo-caller', function () {
     {
       let caught
       try {
-        yield bash() // Call default
+        await bash() // Call default
       } catch (err) {
         caught = err
       }
@@ -165,7 +165,7 @@ describe('sugo-caller', function () {
     {
       let caught
       try {
-        yield actor01.get('bash', {
+        await actor01.get('bash', {
           expect: {
             type: 'object',
             properties: {
@@ -180,25 +180,25 @@ describe('sugo-caller', function () {
       }
       ok(caught)
     }
-  }))
+  })
 
-  it('Bunch of instances', () => co(function * () {
+  it('Bunch of instances', async () => {
     let startAt = new Date()
     let callers = Array.apply(null, new Array(10)).map(() => new SugoCaller({
       port,
       protocol: 'http'
     }))
-    let actors = yield Promise.all(callers.map((caller) => caller.connect('hoge')))
+    let actors = await Promise.all(callers.map((caller) => caller.connect('hoge')))
     for (let actor of actors) {
-      yield actor.disconnect()
+      await actor.disconnect()
     }
 
     for (let caller of callers) {
-      yield caller.disconnect()
+      await caller.disconnect()
     }
-  }))
+  })
 
-  it('With auth', () => co(function * () {
+  it('With auth', async () => {
     let url = `http://localhost:${port}/auth/callers`
 
     // Success
@@ -206,7 +206,7 @@ describe('sugo-caller', function () {
       let caller = new SugoCaller(url, {
         auth: { token: 'mytoken' }
       })
-      let actor01 = yield caller.connect('hoge')
+      let actor01 = await caller.connect('hoge')
       ok(actor01.has('bash'))
     }
     // Failed
@@ -216,7 +216,7 @@ describe('sugo-caller', function () {
       })
       let caught
       try {
-        yield caller.connect('hoge')
+        await caller.connect('hoge')
 
       } catch (e) {
         caught = e
@@ -227,12 +227,12 @@ describe('sugo-caller', function () {
       let caller = new SugoCaller(url, {
         auth: { token: 'mytoken' }
       })
-      let actor01 = yield caller.connect('hoge')
+      let actor01 = await caller.connect('hoge')
       ok(actor01)
     }
-  }))
+  })
 
-  it('Format url', () => co(function * () {
+  it('Format url', async () => {
     equal(
       SugoCaller.parseCallerUrl({
         protocol: 'https',
@@ -249,12 +249,12 @@ describe('sugo-caller', function () {
       }),
       'http://example.com:3000/hoge'
     )
-  }))
+  })
 
-  it('Connect to actual SUGO-Hub', () => co(function * () {
+  it('Connect to actual SUGO-Hub', async () => {
     const { Module } = sugoActor
-    let port = yield aport()
-    let hub = yield sugoHub({
+    let port = await aport()
+    let hub = await sugoHub({
       storage: `${__dirname}/var/sugos/testing-03`
     }).listen(port)
     let actor = sugoActor({
@@ -285,9 +285,9 @@ describe('sugo-caller', function () {
         })
       }
     })
-    yield actor.connect()
+    await actor.connect()
     let caller = new SugoCaller({ port })
-    let actor01 = yield caller.connect('actor01')
+    let actor01 = await caller.connect('actor01')
     ok(actor01)
     equal(actor01.key, 'actor01')
     // TODO after this PR accepted:
@@ -296,34 +296,34 @@ describe('sugo-caller', function () {
     let description = actor01.describe('foo')
     ok(description)
     let foo = actor01.get('foo')
-    let hi = yield foo.sayHi('Bess', new Date())
+    let hi = await foo.sayHi('Bess', new Date())
     equal(hi, 'Hi!, Bess')
 
-    let date = yield foo.handleDate(new Date())
+    let date = await foo.handleDate(new Date())
     ok(date)
-    yield foo.handleFunc(() => 'year!')
+    await foo.handleFunc(() => 'year!')
 
     {
-      let caught = yield foo.doWrong().catch((e) => e)
+      let caught = await foo.doWrong().catch((e) => e)
       equal(caught.name, 'SOMETHING_IS_WRONG')
     }
 
     // Handling array
     {
-      let a = yield foo.returnsArray()
+      let a = await foo.returnsArray()
       ok(a[ 0 ].d instanceof Date)
     }
 
-    yield actor01.disconnect()
-    yield asleep(10)
-    yield actor.disconnect()
-    yield hub.close()
-  }))
+    await actor01.disconnect()
+    await asleep(10)
+    await actor.disconnect()
+    await hub.close()
+  })
 
-  it('Actor level event emitting', () => co(function * () {
+  it('Actor level event emitting', async () => {
     const { Module } = sugoActor
-    let port = yield aport()
-    let hub = yield sugoHub({
+    let port = await aport()
+    let hub = await sugoHub({
       storage: `${__dirname}/var/sugos/testing-05`
     }).listen(port)
     let actor = sugoActor({
@@ -340,22 +340,22 @@ describe('sugo-caller', function () {
         caller.emit('token:received', { token })
       }, 10)
     })
-    yield actor.connect()
-    yield asleep(100)
+    await actor.connect()
+    await asleep(100)
     let caller = new SugoCaller({ port })
-    let actor01 = yield caller.connect('actor01', {
+    let actor01 = await caller.connect('actor01', {
       messages: { token: '1234qwer' }
     })
     actor01.on('token:received', (data) => {
       received = data
     })
-    yield asleep(300)
-    yield actor01.disconnect()
-    yield actor.disconnect()
-    yield hub.close()
+    await asleep(300)
+    await actor01.disconnect()
+    await actor.disconnect()
+    await hub.close()
     ok(received)
     equal(received.token, '1234qwer')
-  }))
+  })
 })
 
 /* global describe, before, after, it */

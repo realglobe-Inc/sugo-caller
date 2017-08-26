@@ -10,15 +10,15 @@ process.chdir(`${__dirname}/..`)
 process.env.DEBUG = 'sg:*'
 
 const apeTasking = require('ape-tasking')
-const co = require('co')
+
 const uuid = require('uuid')
 const sgSocket = require('sg-socket')
-const { exec } = require('child_process')
+const {exec} = require('child_process')
 
-const { RemoteEvents, AcknowledgeStatus } = require('sg-socket-constants')
+const {RemoteEvents, AcknowledgeStatus} = require('sg-socket-constants')
 
-const { OK, NG } = AcknowledgeStatus
-const { PERFORM, PIPE, JOIN, LEAVE, RESULT } = RemoteEvents
+const {OK, NG} = AcknowledgeStatus
+const {PERFORM, PIPE, JOIN, LEAVE, RESULT} = RemoteEvents
 
 let server
 let port = 8888
@@ -33,7 +33,7 @@ apeTasking.runTasks('browser test', [
       resolve()
     })
   }),
-  () => co(function * () {
+  async () => {
     server = sgSocket(port)
     server.of('callers').on('connection', (socket) => {
       socket
@@ -51,9 +51,9 @@ apeTasking.runTasks('browser test', [
                     spawn: {
                       desc: 'Spawn a command',
                       params: [
-                        { name: 'cmd', type: 'string', desc: 'Command to spawn' },
-                        { name: 'args', type: 'array', desc: 'Command arguments' },
-                        { name: 'options', type: 'Object', desc: 'Optional settings' }
+                        {name: 'cmd', type: 'string', desc: 'Command to spawn'},
+                        {name: 'args', type: 'array', desc: 'Command arguments'},
+                        {name: 'options', type: 'Object', desc: 'Optional settings'}
                       ]
                     }
                   }
@@ -79,7 +79,7 @@ apeTasking.runTasks('browser test', [
           }, 10)
         })
       socket.on(LEAVE, (data, callback) => {
-        callback({ status: OK })
+        callback({status: OK})
       })
       setTimeout(() => {
         socket.emit(PIPE, {
@@ -91,7 +91,7 @@ apeTasking.runTasks('browser test', [
         })
       }, 100)
     })
-  }),
+  },
   () => new Promise((resolve, reject) => {
     exec('./node_modules/.bin/karma start', (err, stdout, stderr) => {
       if (err) {
@@ -102,7 +102,7 @@ apeTasking.runTasks('browser test', [
       resolve()
     })
   }),
-  () => co(function * () {
+  async () => {
     server.close()
-  })
+  }
 ], true)

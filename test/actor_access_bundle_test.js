@@ -6,20 +6,20 @@
 
 const ActorAccessBundle = require('../lib/accessing/actor_access_bundle.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('actor-access-bundle', function () {
   this.timeout(3000)
 
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Actor access bundle', () => co(function * () {
+  it('Actor access bundle', async () => {
     let bundle = new ActorAccessBundle({
       specs: {}
     })
@@ -28,7 +28,7 @@ describe('actor-access-bundle', function () {
       sayFoo () { }
     })
     assert.ok(bundle.get('foo').sayFoo)
-  }))
+  })
 })
 
 /* global describe, before, after, it */

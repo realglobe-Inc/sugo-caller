@@ -95,7 +95,7 @@ Requirements
        style="height:40px"
   /></a>
 
-+ [Node.js ( >=6 )][node_download_url]
++ [Node.js ( >=7.6 )][node_download_url]
 + [npm ( >=4 )][npm_url]
 
 [node_download_url]: https://nodejs.org/en/download/

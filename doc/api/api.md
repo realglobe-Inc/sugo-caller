@@ -1,4 +1,4 @@
-# sugo-caller@5.0.4
+# sugo-caller@6.0.0
 
 Caller component of SUGOS.
 
@@ -6,6 +6,9 @@ Caller component of SUGOS.
   + [sugoCaller(config)](#sugo-caller-function-sugo-caller)
 + [`SugoCaller`](#sugo-caller-class) Class
   + [new SugoCaller(config)](#sugo-caller-class-sugo-caller-constructor)
+  + [caller.connect(key, options)](#sugo-caller-class-sugo-caller-connect)
+  + [caller.disconnect(key, options)](#sugo-caller-class-sugo-caller-disconnect)
+  + [caller.urlFromConfig()](#sugo-caller-class-sugo-caller-urlFromConfig)
   + [caller.connect(key, options)](#sugo-caller-class-sugo-caller-connect)
   + [caller.disconnect(key, options)](#sugo-caller-class-sugo-caller-disconnect)
   + [caller.urlFromConfig()](#sugo-caller-class-sugo-caller-urlFromConfig)
@@ -34,12 +37,12 @@ Create a caller instance. Just an alias of `new SugoCaller(config)`
 **Example**:
 
 ```javascript
-co(function * () {
-  let caller = sugoCaller({})
-  let actor01 = yield caller.connect('my-actor-01')
-  let foo = actor01.get('foo') // Get a module of actor
-  yield foo.sayYeah() // Call the remote function
-}).catch((err) => console.error(err))
+(async () => {
+  const caller = sugoCaller({})
+  const actor01 = await caller.connect('my-actor-01')
+  const foo = actor01.get('foo') // Get a module of actor
+  await foo.sayYeah() // Call the remote function
+})().catch((err) => console.error(err))
 ```
 
 
@@ -70,6 +73,38 @@ Constructor of SugoCaller class
 | config.host | string | Hub host name. ( eg: "localhost:3000" ) |
 | config.pathname | string | Hub URL path name ( eg: "/callers" ) |
 | config.auth | Object | Auth data for hub |
+
+
+<a class='md-heading-link' name="sugo-caller-class-sugo-caller-connect" ></a>
+
+### caller.connect(key, options) -> `Promise.<ActorAccessBundle>`
+
+Connect to actor
+
+| Param | Type | Description |
+| ----- | --- | -------- |
+| key | string | Key of actor |
+| options | Object | Optional settings |
+| options.messages | Object | Connect messages |
+
+
+<a class='md-heading-link' name="sugo-caller-class-sugo-caller-disconnect" ></a>
+
+### caller.disconnect(key, options) -> `Promise`
+
+Disconnect from cloud server
+
+| Param | Type | Description |
+| ----- | --- | -------- |
+| key | string | Key of actor to connect |
+| options | Object | Optional settings |
+| options.messages | Object | Disconnect messages |
+
+
+<a class='md-heading-link' name="sugo-caller-class-sugo-caller-urlFromConfig" ></a>
+
+### caller.urlFromConfig()
+
 
 
 <a class='md-heading-link' name="sugo-caller-class-sugo-caller-connect" ></a>

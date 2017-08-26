@@ -1,512 +1,863 @@
 {
-  "functions": [
-    {
-      "name": "sugoCaller",
-      "access": "",
-      "virtual": false,
-      "description": "Create a caller instance. Just an alias of `new SugoCaller(config)`",
-      "parameters": [
+    "functions": [
         {
-          "name": "config",
-          "type": "Object",
-          "description": "Sugo caller configuration",
-          "default": "",
-          "optional": "",
-          "nullable": ""
-        }
-      ],
-      "examples": [
-        "co(function * () {\n  let caller = sugoCaller({})\n  let actor01 = yield caller.connect('my-actor-01')\n  let foo = actor01.get('foo') // Get a module of actor\n  yield foo.sayYeah() // Call the remote function\n}).catch((err) => console.error(err))"
-      ],
-      "returns": {
-        "type": "SugoCaller",
-        "description": ""
-      }
-    },
-    {
-      "name": "describe",
-      "access": "",
-      "virtual": false,
-      "description": "Describe a module",
-      "parameters": [
-        {
-          "name": "moduleName",
-          "type": "string",
-          "description": "Name of module",
-          "default": "",
-          "optional": "",
-          "nullable": ""
-        }
-      ],
-      "examples": [],
-      "returns": {
-        "type": "Object",
-        "description": "- Module description"
-      }
-    },
-    {
-      "name": "actorAccessModule",
-      "access": "",
-      "virtual": false,
-      "description": "Create a module no actor access",
-      "parameters": [
-        {
-          "name": "methods",
-          "type": "Object",
-          "description": "Module methods",
-          "default": "",
-          "optional": "",
-          "nullable": ""
-        },
-        {
-          "name": "connection",
-          "type": "Object",
-          "description": "Hub connection",
-          "default": "",
-          "optional": "",
-          "nullable": ""
-        },
-        {
-          "name": "options",
-          "type": "Object",
-          "description": "Optional settings",
-          "default": "{}",
-          "optional": true,
-          "nullable": ""
-        }
-      ],
-      "examples": [],
-      "returns": {
-        "type": "Object",
-        "description": "Defined module"
-      }
-    },
-    {
-      "name": "parseCallerUrl",
-      "access": "",
-      "virtual": false,
-      "description": "Parse caller URL",
-      "parameters": [
-        {
-          "name": null,
-          "type": [
-            "Object",
-            "string"
-          ],
-          "description": "URL string or config",
-          "default": "",
-          "optional": "",
-          "nullable": ""
-        }
-      ],
-      "examples": [],
-      "returns": {
-        "type": "string",
-        "description": "- Parsed url"
-      }
-    }
-  ],
-  "classes": [
-    {
-      "name": "SugoCaller",
-      "description": "",
-      "extends": [
-        "SugoClient"
-      ],
-      "access": "",
-      "virtual": false,
-      "fires": "",
-      "constructor": {
-        "name": "SugoCaller",
-        "description": "Hub client for caller side.\nWhen you connect to remote actor with a caller, it receives specification of the actor and dynamically define function to kick actor side function.\nWith this way you can magically call functions declared on remote as if they were here.",
-        "parameters": [
-          {
-            "name": "config",
-            "type": "Object",
-            "description": "Caller configuration",
-            "default": "",
-            "optional": "",
-            "nullable": ""
-          },
-          {
-            "name": "config.protocol",
-            "type": "string",
-            "description": "Protocol to use ( \"http\" or \"https\" )",
-            "default": "",
-            "optional": true,
-            "nullable": ""
-          },
-          {
-            "name": "config.host",
-            "type": "string",
-            "description": "Hub host name. ( eg: \"localhost:3000\" )",
-            "default": "",
-            "optional": true,
-            "nullable": ""
-          },
-          {
-            "name": "config.pathname",
-            "type": "string",
-            "description": "Hub URL path name ( eg: \"/callers\" )",
-            "default": "",
-            "optional": true,
-            "nullable": ""
-          },
-          {
-            "name": "config.auth",
-            "type": "Object",
-            "description": "Auth data for hub",
-            "default": "",
-            "optional": true,
-            "nullable": ""
-          }
-        ],
-        "examples": []
-      },
-      "functions": [
-        {
-          "name": "connect",
-          "access": "",
-          "virtual": false,
-          "description": "Connect to actor",
-          "parameters": [
-            {
-              "name": "key",
-              "type": "string",
-              "description": "Key of actor",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            },
-            {
-              "name": "options",
-              "type": "Object",
-              "description": "Optional settings",
-              "default": "{}",
-              "optional": true,
-              "nullable": ""
-            },
-            {
-              "name": "options.messages",
-              "type": "Object",
-              "description": "Connect messages",
-              "default": null,
-              "optional": true,
-              "nullable": ""
+            "name": "sugoCaller",
+            "access": "",
+            "virtual": false,
+            "description": "Create a caller instance. Just an alias of `new SugoCaller(config)`",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "Object",
+                    "description": "Sugo caller configuration",
+                    "default": "",
+                    "optional": "",
+                    "nullable": ""
+                }
+            ],
+            "examples": [
+                "(async () => {\n  const caller = sugoCaller({})\n  const actor01 = await caller.connect('my-actor-01')\n  const foo = actor01.get('foo') // Get a module of actor\n  await foo.sayYeah() // Call the remote function\n})().catch((err) => console.error(err))"
+            ],
+            "returns": {
+                "type": "SugoCaller",
+                "description": ""
             }
-          ],
-          "examples": [],
-          "returns": {
-            "type": "Promise.<ActorAccessBundle>",
-            "description": "- Actor accessor"
-          }
         },
         {
-          "name": "disconnect",
-          "access": "",
-          "virtual": false,
-          "description": "Disconnect from cloud server",
-          "parameters": [
-            {
-              "name": "key",
-              "type": "string",
-              "description": "Key of actor to connect",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            },
-            {
-              "name": "options",
-              "type": "Object",
-              "description": "Optional settings",
-              "default": "{}",
-              "optional": true,
-              "nullable": ""
-            },
-            {
-              "name": "options.messages",
-              "type": "Object",
-              "description": "Disconnect messages",
-              "default": null,
-              "optional": true,
-              "nullable": ""
+            "name": "describe",
+            "access": "",
+            "virtual": false,
+            "description": "Describe a module",
+            "parameters": [
+                {
+                    "name": "moduleName",
+                    "type": "string",
+                    "description": "Name of module",
+                    "default": "",
+                    "optional": "",
+                    "nullable": ""
+                }
+            ],
+            "examples": [],
+            "returns": {
+                "type": "Object",
+                "description": "- Module description"
             }
-          ],
-          "examples": [],
-          "returns": {
-            "type": "Promise",
-            "description": ""
-          }
         },
         {
-          "name": "urlFromConfig",
-          "access": "",
-          "virtual": false,
-          "description": "",
-          "parameters": [],
-          "examples": []
+            "name": "actorAccessModule",
+            "access": "",
+            "virtual": false,
+            "description": "Create a module no actor access",
+            "parameters": [
+                {
+                    "name": "methods",
+                    "type": "Object",
+                    "description": "Module methods",
+                    "default": "",
+                    "optional": "",
+                    "nullable": ""
+                },
+                {
+                    "name": "connection",
+                    "type": "Object",
+                    "description": "Hub connection",
+                    "default": "",
+                    "optional": "",
+                    "nullable": ""
+                },
+                {
+                    "name": "options",
+                    "type": "Object",
+                    "description": "Optional settings",
+                    "default": "{}",
+                    "optional": true,
+                    "nullable": ""
+                }
+            ],
+            "examples": [],
+            "returns": {
+                "type": "Object",
+                "description": "Defined module"
+            }
+        },
+        {
+            "name": "sugoCaller",
+            "access": "",
+            "virtual": false,
+            "description": "Create a caller instance. Just an alias of `new SugoCaller(config)`",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "Object",
+                    "description": "Sugo caller configuration",
+                    "default": "",
+                    "optional": "",
+                    "nullable": ""
+                }
+            ],
+            "examples": [
+                "(async () => {\n  const caller = sugoCaller({})\n  const actor01 = await caller.connect('my-actor-01')\n  const foo = actor01.get('foo') // Get a module of actor\n  await foo.sayYeah() // Call the remote function\n})().catch((err) => console.error(err))"
+            ],
+            "returns": {
+                "type": "SugoCaller",
+                "description": ""
+            }
+        },
+        {
+            "name": "parseCallerUrl",
+            "access": "",
+            "virtual": false,
+            "description": "Parse caller URL",
+            "parameters": [
+                {
+                    "name": null,
+                    "type": [
+                        "Object",
+                        "string"
+                    ],
+                    "description": "URL string or config",
+                    "default": "",
+                    "optional": "",
+                    "nullable": ""
+                }
+            ],
+            "examples": [],
+            "returns": {
+                "type": "string",
+                "description": "- Parsed url"
+            }
         }
-      ],
-      "properties": [
+    ],
+    "classes": [
         {
-          "name": "clientType",
-          "access": "",
-          "virtual": false,
-          "description": "",
-          "type": ""
+            "name": "SugoCaller",
+            "description": "",
+            "extends": [
+                "SugoClient"
+            ],
+            "access": "",
+            "virtual": false,
+            "fires": "",
+            "constructor": {
+                "name": "SugoCaller",
+                "description": "Hub client for caller side.\nWhen you connect to remote actor with a caller, it receives specification of the actor and dynamically define function to kick actor side function.\nWith this way you can magically call functions declared on remote as if they were here.",
+                "parameters": [
+                    {
+                        "name": "config",
+                        "type": "Object",
+                        "description": "Caller configuration",
+                        "default": "",
+                        "optional": "",
+                        "nullable": ""
+                    },
+                    {
+                        "name": "config.protocol",
+                        "type": "string",
+                        "description": "Protocol to use ( \"http\" or \"https\" )",
+                        "default": "",
+                        "optional": true,
+                        "nullable": ""
+                    },
+                    {
+                        "name": "config.host",
+                        "type": "string",
+                        "description": "Hub host name. ( eg: \"localhost:3000\" )",
+                        "default": "",
+                        "optional": true,
+                        "nullable": ""
+                    },
+                    {
+                        "name": "config.pathname",
+                        "type": "string",
+                        "description": "Hub URL path name ( eg: \"/callers\" )",
+                        "default": "",
+                        "optional": true,
+                        "nullable": ""
+                    },
+                    {
+                        "name": "config.auth",
+                        "type": "Object",
+                        "description": "Auth data for hub",
+                        "default": "",
+                        "optional": true,
+                        "nullable": ""
+                    }
+                ],
+                "examples": []
+            },
+            "functions": [
+                {
+                    "name": "connect",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Connect to actor",
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "description": "Key of actor",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options",
+                            "type": "Object",
+                            "description": "Optional settings",
+                            "default": "{}",
+                            "optional": true,
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options.messages",
+                            "type": "Object",
+                            "description": "Connect messages",
+                            "default": null,
+                            "optional": true,
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": [],
+                    "returns": {
+                        "type": "Promise.<ActorAccessBundle>",
+                        "description": "- Actor accessor"
+                    }
+                },
+                {
+                    "name": "disconnect",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Disconnect from cloud server",
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "description": "Key of actor to connect",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options",
+                            "type": "Object",
+                            "description": "Optional settings",
+                            "default": "{}",
+                            "optional": true,
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options.messages",
+                            "type": "Object",
+                            "description": "Disconnect messages",
+                            "default": null,
+                            "optional": true,
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": [],
+                    "returns": {
+                        "type": "Promise",
+                        "description": ""
+                    }
+                },
+                {
+                    "name": "urlFromConfig",
+                    "access": "",
+                    "virtual": false,
+                    "description": "",
+                    "parameters": [],
+                    "examples": []
+                },
+                {
+                    "name": "connect",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Connect to actor",
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "description": "Key of actor",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options",
+                            "type": "Object",
+                            "description": "Optional settings",
+                            "default": "{}",
+                            "optional": true,
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options.messages",
+                            "type": "Object",
+                            "description": "Connect messages",
+                            "default": null,
+                            "optional": true,
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": [],
+                    "returns": {
+                        "type": "Promise.<ActorAccessBundle>",
+                        "description": "- Actor accessor"
+                    }
+                },
+                {
+                    "name": "disconnect",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Disconnect from cloud server",
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "description": "Key of actor to connect",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options",
+                            "type": "Object",
+                            "description": "Optional settings",
+                            "default": "{}",
+                            "optional": true,
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options.messages",
+                            "type": "Object",
+                            "description": "Disconnect messages",
+                            "default": null,
+                            "optional": true,
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": [],
+                    "returns": {
+                        "type": "Promise",
+                        "description": ""
+                    }
+                },
+                {
+                    "name": "urlFromConfig",
+                    "access": "",
+                    "virtual": false,
+                    "description": "",
+                    "parameters": [],
+                    "examples": []
+                }
+            ],
+            "properties": [
+                {
+                    "name": "clientType",
+                    "access": "",
+                    "virtual": false,
+                    "description": "",
+                    "type": ""
+                },
+                {
+                    "name": "clientType",
+                    "access": "",
+                    "virtual": false,
+                    "description": "",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "ActorAccessBundle",
+            "description": "",
+            "extends": [],
+            "access": "",
+            "virtual": false,
+            "fires": "",
+            "constructor": {
+                "name": "ActorAccessBundle",
+                "description": "Bundle for actor access.\nThis class provides access for loaded modules on actor.",
+                "parameters": [
+                    {
+                        "name": "specs",
+                        "type": "Object",
+                        "description": "Actor module specs",
+                        "default": "",
+                        "optional": "",
+                        "nullable": ""
+                    }
+                ],
+                "examples": []
+            },
+            "functions": [
+                {
+                    "name": "get",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Get a module",
+                    "parameters": [
+                        {
+                            "name": "moduleName",
+                            "type": "string",
+                            "description": "Name of module",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options",
+                            "type": "Object",
+                            "description": "Optional settings",
+                            "default": "{}",
+                            "optional": true,
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": [],
+                    "returns": {
+                        "type": "ActorAccessModule",
+                        "description": "- Found module"
+                    }
+                },
+                {
+                    "name": "has",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Check if module exists",
+                    "parameters": [
+                        {
+                            "name": "moduleName",
+                            "type": "string",
+                            "description": "Name of module",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": [],
+                    "returns": {
+                        "type": "Boolean",
+                        "description": "- Has the module or not"
+                    }
+                },
+                {
+                    "name": "set",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Set module",
+                    "parameters": [
+                        {
+                            "name": "moduleName",
+                            "type": "string",
+                            "description": "Name of module",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "module",
+                            "type": "ActorAccessModule",
+                            "description": "Module to set",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options",
+                            "type": "Object",
+                            "description": "Optional settings",
+                            "default": "{}",
+                            "optional": true,
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": []
+                },
+                {
+                    "name": "del",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Delete module",
+                    "parameters": [
+                        {
+                            "name": "moduleName",
+                            "type": "string",
+                            "description": "Name of module",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": []
+                },
+                {
+                    "name": "names",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Get names of modules",
+                    "parameters": [],
+                    "examples": [],
+                    "returns": {
+                        "type": "Array.<string>",
+                        "description": ""
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ActorAccessModule",
+            "description": "",
+            "extends": [],
+            "access": "",
+            "virtual": false,
+            "fires": "",
+            "constructor": {
+                "name": "ActorAccessModule",
+                "description": "Loaded module for an actor.\nThis class provides pseudo interfaces for remote actor module",
+                "parameters": [
+                    {
+                        "name": "methods",
+                        "type": "Object",
+                        "description": "Actor specifications for module methods",
+                        "default": "",
+                        "optional": "",
+                        "nullable": ""
+                    },
+                    {
+                        "name": "connection",
+                        "type": "Object",
+                        "description": "Actor connections",
+                        "default": "",
+                        "optional": "",
+                        "nullable": ""
+                    }
+                ],
+                "examples": []
+            }
+        },
+        {
+            "name": "ActorAccess",
+            "description": "",
+            "extends": [],
+            "access": "",
+            "virtual": false,
+            "fires": "",
+            "constructor": {
+                "name": "ActorAccess",
+                "description": "Access for actors.",
+                "parameters": [
+                    {
+                        "name": "config",
+                        "type": "Object",
+                        "description": "Actor access configuration",
+                        "default": "",
+                        "optional": "",
+                        "nullable": ""
+                    },
+                    {
+                        "name": "config.specs",
+                        "type": "Object",
+                        "description": "Actor module specs",
+                        "default": "",
+                        "optional": "",
+                        "nullable": ""
+                    },
+                    {
+                        "name": "config.connector",
+                        "type": "Object",
+                        "description": "Hub server connector",
+                        "default": "",
+                        "optional": "",
+                        "nullable": ""
+                    }
+                ],
+                "examples": []
+            },
+            "functions": [
+                {
+                    "name": "registerSpecs",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Register module specs.",
+                    "parameters": [
+                        {
+                            "name": "specs",
+                            "type": "Object",
+                            "description": "Spec data of actor",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "connector",
+                            "type": "Object",
+                            "description": "Connector functions",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": []
+                },
+                {
+                    "name": "deregisterSpecs",
+                    "access": "",
+                    "virtual": false,
+                    "description": "De-register module specs.",
+                    "parameters": [
+                        {
+                            "name": "moduleNames",
+                            "type": "string",
+                            "description": "Spec data of actor",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": []
+                }
+            ]
+        },
+        {
+            "name": "SugoCaller",
+            "description": "",
+            "extends": [
+                "SugoClient"
+            ],
+            "access": "",
+            "virtual": false,
+            "fires": "",
+            "constructor": {
+                "name": "SugoCaller",
+                "description": "Hub client for caller side.\nWhen you connect to remote actor with a caller, it receives specification of the actor and dynamically define function to kick actor side function.\nWith this way you can magically call functions declared on remote as if they were here.",
+                "parameters": [
+                    {
+                        "name": "config",
+                        "type": "Object",
+                        "description": "Caller configuration",
+                        "default": "",
+                        "optional": "",
+                        "nullable": ""
+                    },
+                    {
+                        "name": "config.protocol",
+                        "type": "string",
+                        "description": "Protocol to use ( \"http\" or \"https\" )",
+                        "default": "",
+                        "optional": true,
+                        "nullable": ""
+                    },
+                    {
+                        "name": "config.host",
+                        "type": "string",
+                        "description": "Hub host name. ( eg: \"localhost:3000\" )",
+                        "default": "",
+                        "optional": true,
+                        "nullable": ""
+                    },
+                    {
+                        "name": "config.pathname",
+                        "type": "string",
+                        "description": "Hub URL path name ( eg: \"/callers\" )",
+                        "default": "",
+                        "optional": true,
+                        "nullable": ""
+                    },
+                    {
+                        "name": "config.auth",
+                        "type": "Object",
+                        "description": "Auth data for hub",
+                        "default": "",
+                        "optional": true,
+                        "nullable": ""
+                    }
+                ],
+                "examples": []
+            },
+            "functions": [
+                {
+                    "name": "connect",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Connect to actor",
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "description": "Key of actor",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options",
+                            "type": "Object",
+                            "description": "Optional settings",
+                            "default": "{}",
+                            "optional": true,
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options.messages",
+                            "type": "Object",
+                            "description": "Connect messages",
+                            "default": null,
+                            "optional": true,
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": [],
+                    "returns": {
+                        "type": "Promise.<ActorAccessBundle>",
+                        "description": "- Actor accessor"
+                    }
+                },
+                {
+                    "name": "disconnect",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Disconnect from cloud server",
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "description": "Key of actor to connect",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options",
+                            "type": "Object",
+                            "description": "Optional settings",
+                            "default": "{}",
+                            "optional": true,
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options.messages",
+                            "type": "Object",
+                            "description": "Disconnect messages",
+                            "default": null,
+                            "optional": true,
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": [],
+                    "returns": {
+                        "type": "Promise",
+                        "description": ""
+                    }
+                },
+                {
+                    "name": "urlFromConfig",
+                    "access": "",
+                    "virtual": false,
+                    "description": "",
+                    "parameters": [],
+                    "examples": []
+                },
+                {
+                    "name": "connect",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Connect to actor",
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "description": "Key of actor",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options",
+                            "type": "Object",
+                            "description": "Optional settings",
+                            "default": "{}",
+                            "optional": true,
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options.messages",
+                            "type": "Object",
+                            "description": "Connect messages",
+                            "default": null,
+                            "optional": true,
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": [],
+                    "returns": {
+                        "type": "Promise.<ActorAccessBundle>",
+                        "description": "- Actor accessor"
+                    }
+                },
+                {
+                    "name": "disconnect",
+                    "access": "",
+                    "virtual": false,
+                    "description": "Disconnect from cloud server",
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "description": "Key of actor to connect",
+                            "default": "",
+                            "optional": "",
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options",
+                            "type": "Object",
+                            "description": "Optional settings",
+                            "default": "{}",
+                            "optional": true,
+                            "nullable": ""
+                        },
+                        {
+                            "name": "options.messages",
+                            "type": "Object",
+                            "description": "Disconnect messages",
+                            "default": null,
+                            "optional": true,
+                            "nullable": ""
+                        }
+                    ],
+                    "examples": [],
+                    "returns": {
+                        "type": "Promise",
+                        "description": ""
+                    }
+                },
+                {
+                    "name": "urlFromConfig",
+                    "access": "",
+                    "virtual": false,
+                    "description": "",
+                    "parameters": [],
+                    "examples": []
+                }
+            ],
+            "properties": [
+                {
+                    "name": "clientType",
+                    "access": "",
+                    "virtual": false,
+                    "description": "",
+                    "type": ""
+                },
+                {
+                    "name": "clientType",
+                    "access": "",
+                    "virtual": false,
+                    "description": "",
+                    "type": ""
+                }
+            ]
         }
-      ]
-    },
-    {
-      "name": "ActorAccess",
-      "description": "",
-      "extends": [],
-      "access": "",
-      "virtual": false,
-      "fires": "",
-      "constructor": {
-        "name": "ActorAccess",
-        "description": "Access for actors.",
-        "parameters": [
-          {
-            "name": "config",
-            "type": "Object",
-            "description": "Actor access configuration",
-            "default": "",
-            "optional": "",
-            "nullable": ""
-          },
-          {
-            "name": "config.specs",
-            "type": "Object",
-            "description": "Actor module specs",
-            "default": "",
-            "optional": "",
-            "nullable": ""
-          },
-          {
-            "name": "config.connector",
-            "type": "Object",
-            "description": "Hub server connector",
-            "default": "",
-            "optional": "",
-            "nullable": ""
-          }
-        ],
-        "examples": []
-      },
-      "functions": [
-        {
-          "name": "registerSpecs",
-          "access": "",
-          "virtual": false,
-          "description": "Register module specs.",
-          "parameters": [
-            {
-              "name": "specs",
-              "type": "Object",
-              "description": "Spec data of actor",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            },
-            {
-              "name": "connector",
-              "type": "Object",
-              "description": "Connector functions",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": []
-        },
-        {
-          "name": "deregisterSpecs",
-          "access": "",
-          "virtual": false,
-          "description": "De-register module specs.",
-          "parameters": [
-            {
-              "name": "moduleNames",
-              "type": "string",
-              "description": "Spec data of actor",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": []
-        }
-      ]
-    },
-    {
-      "name": "ActorAccessBundle",
-      "description": "",
-      "extends": [],
-      "access": "",
-      "virtual": false,
-      "fires": "",
-      "constructor": {
-        "name": "ActorAccessBundle",
-        "description": "Bundle for actor access.\nThis class provides access for loaded modules on actor.",
-        "parameters": [
-          {
-            "name": "specs",
-            "type": "Object",
-            "description": "Actor module specs",
-            "default": "",
-            "optional": "",
-            "nullable": ""
-          }
-        ],
-        "examples": []
-      },
-      "functions": [
-        {
-          "name": "get",
-          "access": "",
-          "virtual": false,
-          "description": "Get a module",
-          "parameters": [
-            {
-              "name": "moduleName",
-              "type": "string",
-              "description": "Name of module",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            },
-            {
-              "name": "options",
-              "type": "Object",
-              "description": "Optional settings",
-              "default": "{}",
-              "optional": true,
-              "nullable": ""
-            }
-          ],
-          "examples": [],
-          "returns": {
-            "type": "ActorAccessModule",
-            "description": "- Found module"
-          }
-        },
-        {
-          "name": "has",
-          "access": "",
-          "virtual": false,
-          "description": "Check if module exists",
-          "parameters": [
-            {
-              "name": "moduleName",
-              "type": "string",
-              "description": "Name of module",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": [],
-          "returns": {
-            "type": "Boolean",
-            "description": "- Has the module or not"
-          }
-        },
-        {
-          "name": "set",
-          "access": "",
-          "virtual": false,
-          "description": "Set module",
-          "parameters": [
-            {
-              "name": "moduleName",
-              "type": "string",
-              "description": "Name of module",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            },
-            {
-              "name": "module",
-              "type": "ActorAccessModule",
-              "description": "Module to set",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            },
-            {
-              "name": "options",
-              "type": "Object",
-              "description": "Optional settings",
-              "default": "{}",
-              "optional": true,
-              "nullable": ""
-            }
-          ],
-          "examples": []
-        },
-        {
-          "name": "del",
-          "access": "",
-          "virtual": false,
-          "description": "Delete module",
-          "parameters": [
-            {
-              "name": "moduleName",
-              "type": "string",
-              "description": "Name of module",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": []
-        },
-        {
-          "name": "names",
-          "access": "",
-          "virtual": false,
-          "description": "Get names of modules",
-          "parameters": [],
-          "examples": [],
-          "returns": {
-            "type": "Array.<string>",
-            "description": ""
-          }
-        }
-      ]
-    },
-    {
-      "name": "ActorAccessModule",
-      "description": "",
-      "extends": [],
-      "access": "",
-      "virtual": false,
-      "fires": "",
-      "constructor": {
-        "name": "ActorAccessModule",
-        "description": "Loaded module for an actor.\nThis class provides pseudo interfaces for remote actor module",
-        "parameters": [
-          {
-            "name": "methods",
-            "type": "Object",
-            "description": "Actor specifications for module methods",
-            "default": "",
-            "optional": "",
-            "nullable": ""
-          },
-          {
-            "name": "connection",
-            "type": "Object",
-            "description": "Actor connections",
-            "default": "",
-            "optional": "",
-            "nullable": ""
-          }
-        ],
-        "examples": []
-      }
-    }
-  ]
+    ]
 }
