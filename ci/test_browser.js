@@ -83,15 +83,16 @@ apeTasking.runTasks('browser test', [
       socket.on(LEAVE, (data, callback) => {
         callback({status: OK})
       })
-      setTimeout(() => {
-        socket.emit(PIPE, {
-          module: 'bash',
-          event: 'stdout',
-          data: {
-            'hoge': 'hogehoge'
-          }
-        })
-      }, 100)
+      const emitPipe = () => socket.emit(PIPE, {
+        module: 'bash',
+        event: 'stdout',
+        data: {
+          'hoge': 'hogehoge'
+        }
+      })
+
+      setTimeout(() => emitPipe(), 500)
+      setTimeout(() => emitPipe(), 1500)
     })
   },
   () => asleep(300),

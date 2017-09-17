@@ -9,7 +9,7 @@ const assert = require('assert')
 const asleep = require('asleep')
 
 describe('sugo-caller', function () {
-  this.timeout(92000)
+  this.timeout(54000)
   let port = 8888
   before(async () => {
 
@@ -49,34 +49,34 @@ describe('sugo-caller', function () {
     await caller.disconnect('hoge')
 
     // // Try call after disconnected
-    // {
-    //   let caught
-    //   try {
-    //     await bash() // Call default
-    //   } catch (err) {
-    //     caught = err
-    //   }
-    //   assert.ok(caught)
-    // }
-    // // Validate the connecting module
-    // {
-    //   let caught
-    //   try {
-    //     await actor01.get('bash', {
-    //       expect: {
-    //         type: 'object',
-    //         properties: {
-    //           name: {
-    //             enum: ['super-bash', 'ultra-bash']
-    //           }
-    //         }
-    //       }
-    //     })
-    //   } catch (err) {
-    //     caught = err
-    //   }
-    //   assert.ok(caught)
-    // }
+    {
+      let caught
+      try {
+        await bash() // Call default
+      } catch (err) {
+        caught = err
+      }
+      assert.ok(caught)
+    }
+    // Validate the connecting module
+    {
+      let caught
+      try {
+        await actor01.get('bash', {
+          expect: {
+            type: 'object',
+            properties: {
+              name: {
+                enum: ['super-bash', 'ultra-bash']
+              }
+            }
+          }
+        })
+      } catch (err) {
+        caught = err
+      }
+      assert.ok(caught)
+    }
   })
 
   it('Bunch of instances', async () => {
