@@ -9,7 +9,7 @@ const assert = require('assert')
 const asleep = require('asleep')
 
 describe('sugo-caller', function () {
-  this.timeout(54000)
+  this.timeout(92000)
   let port = 8888
   before(async () => {
 
