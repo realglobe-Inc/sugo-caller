@@ -8,8 +8,8 @@ const ActorAccess = require('../shim/browser/accessing/actor_access.js')
 const assert = require('assert')
 const asleep = require('asleep')
 
-
-describe('actor-access', () => {
+describe('actor-access', function () {
+  this.timeout(6000)
   before(async () => {
 
   })
@@ -18,7 +18,7 @@ describe('actor-access', () => {
 
   })
 
-  it('Actor access', async () => {
+  it('Actor access', async function () {
     let access = new ActorAccess({
       specs: {
         bash: {
@@ -26,9 +26,9 @@ describe('actor-access', () => {
             spawn: {
               desc: 'Spawn a command',
               params: [
-                { name: 'cmd', type: 'string', desc: 'Command to spawn' },
-                { name: 'args', type: 'array', desc: 'Command arguments' },
-                { name: 'options', type: 'Object', desc: 'Optional settings' }
+                {name: 'cmd', type: 'string', desc: 'Command to spawn'},
+                {name: 'args', type: 'array', desc: 'Command arguments'},
+                {name: 'options', type: 'Object', desc: 'Optional settings'}
               ]
             }
           }
@@ -42,9 +42,9 @@ describe('actor-access', () => {
       }
     })
     assert.ok(access)
-    let { bundle } = access
+    let {bundle} = access
     let bash = bundle.get('bash')
-    await bash.spawn('ls', [ '-la' ])
+    await bash.spawn('ls', ['-la'])
     bash.emit('stdin', 'hoge')
     await asleep(200)
   })
