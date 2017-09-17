@@ -48,35 +48,35 @@ describe('sugo-caller', function () {
 
     await caller.disconnect('hoge')
 
-    // Try call after disconnected
-    {
-      let caught
-      try {
-        await bash() // Call default
-      } catch (err) {
-        caught = err
-      }
-      assert.ok(caught)
-    }
-    // Validate the connecting module
-    {
-      let caught
-      try {
-        await actor01.get('bash', {
-          expect: {
-            type: 'object',
-            properties: {
-              name: {
-                enum: ['super-bash', 'ultra-bash']
-              }
-            }
-          }
-        })
-      } catch (err) {
-        caught = err
-      }
-      assert.ok(caught)
-    }
+    // // Try call after disconnected
+    // {
+    //   let caught
+    //   try {
+    //     await bash() // Call default
+    //   } catch (err) {
+    //     caught = err
+    //   }
+    //   assert.ok(caught)
+    // }
+    // // Validate the connecting module
+    // {
+    //   let caught
+    //   try {
+    //     await actor01.get('bash', {
+    //       expect: {
+    //         type: 'object',
+    //         properties: {
+    //           name: {
+    //             enum: ['super-bash', 'ultra-bash']
+    //           }
+    //         }
+    //       }
+    //     })
+    //   } catch (err) {
+    //     caught = err
+    //   }
+    //   assert.ok(caught)
+    // }
   })
 
   it('Bunch of instances', async () => {
