@@ -49,6 +49,6 @@ module.exports = function (config) {
 
     logLevel: config.LOG_INFO,
 
-    browserNoActivityTimeout: 30000
+    browserNoActivityTimeout: 60000
   })
 }
