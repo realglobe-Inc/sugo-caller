@@ -34,7 +34,7 @@ apeTasking.runTasks('browser test', [
       resolve()
     })
   }),
-  () => asleep(300),
+  () => asleep(500),
   async () => {
     server = sgSocket(port)
     server.of('callers').on('connection', (socket) => {
@@ -106,7 +106,7 @@ apeTasking.runTasks('browser test', [
     })
   }),
   async () => {
-    await asleep(300)
+    await asleep(500)
     server.close()
   }
 ], true)
