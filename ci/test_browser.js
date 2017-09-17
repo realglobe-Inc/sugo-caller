@@ -13,6 +13,7 @@ const apeTasking = require('ape-tasking')
 
 const uuid = require('uuid')
 const sgSocket = require('sg-socket')
+const asleep = require('asleep')
 const {exec} = require('child_process')
 
 const {RemoteEvents, AcknowledgeStatus} = require('sg-socket-constants')
@@ -33,6 +34,7 @@ apeTasking.runTasks('browser test', [
       resolve()
     })
   }),
+  () => asleep(300),
   async () => {
     server = sgSocket(port)
     server.of('callers').on('connection', (socket) => {
@@ -92,6 +94,7 @@ apeTasking.runTasks('browser test', [
       }, 100)
     })
   },
+  () => asleep(300),
   () => new Promise((resolve, reject) => {
     exec('./node_modules/.bin/karma start', (err, stdout, stderr) => {
       if (err) {
@@ -103,6 +106,7 @@ apeTasking.runTasks('browser test', [
     })
   }),
   async () => {
+    await asleep(300)
     server.close()
   }
 ], true)
