@@ -58,7 +58,7 @@
     "markdown-toc": "^1.1.0",
     "request": "^2.81.0",
     "sg-karma": "^1.0.5",
-    "sg-socket": "^2.0.1",
+    "sg-socket": "^3.0.1",
     "sg-templates": "^1.4.4",
     "socketio-auth": "^0.1.0",
     "stringcase": "^4.0.0",
